@@ -1,0 +1,29 @@
+title: Matías Zabaljáuregui
+description: IA agéntica, arquitectura de agentes y docencia.
+url: "https://matiaszabal.github.io"
+baseurl: ""
+lang: es
+timezone: America/Argentina/Buenos_Aires
+
+theme: minima
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Los posts con fecha futura NO se publican hasta que llegue su fecha
+# (el workflow reconstruye el sitio todos los días).
+future: false
+
+minima:
+  social_links:
+    github: matiaszabal
+
+header_pages:
+  - about.md
+
+exclude:
+  - CLAUDE.md
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - _drafts
