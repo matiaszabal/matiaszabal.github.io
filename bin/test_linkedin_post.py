@@ -164,6 +164,16 @@ class Unitarias(Base):
         c = m.build_commentary(m.load_posts(m.read_config())[0])
         self.assertTrue(c.startswith("Nuevo en el blog: Mi post\n\nResumen \\(con paréntesis\\) y \\#hashtag"))
 
+    def test_sin_descripcion_no_manda_campo_vacio(self):
+        md = '---\nlayout: post\ntitle: "Sin resumen"\ndate: 2026-11-07 00:20:00 -0300\n---\n\ncuerpo\n'
+        self.add("nuevo", md)
+        m = self.mod()
+        p = m.load_posts(m.read_config())[0]
+        body = m.build_post_body(p, "urn:li:person:abc123", None)
+        self.assertNotIn("description", body["content"]["article"])
+        self.assertNotIn("thumbnail", body["content"]["article"])
+        self.assertEqual(m.build_commentary(p), "Nuevo en el blog: Sin resumen")
+
     def test_vencimiento_del_token(self):
         m = self.mod()
         os.environ["LINKEDIN_TOKEN_EXPIRES_AT"] = (date.today() + timedelta(days=7)).isoformat()

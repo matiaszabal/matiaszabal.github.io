@@ -192,11 +192,9 @@ def build_commentary(post: dict) -> str:
 
 
 def build_post_body(post: dict, person_urn: str, thumbnail_urn: str | None) -> dict:
-    article = {
-        "source": post["url"],
-        "title": clip(post["title"], 200),
-        "description": clip(post["description"], 250),
-    }
+    article = {"source": post["url"], "title": clip(post["title"], 200)}
+    if post["description"].strip():  # LinkedIn rechaza campos de texto en blanco
+        article["description"] = clip(post["description"], 250)
     if thumbnail_urn:
         article["thumbnail"] = thumbnail_urn
     return {
