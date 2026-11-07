@@ -34,3 +34,11 @@
 @use "tabs";
 @use "teachings";
 @use "typograms";
+
+/* Las imágenes de los posts (tablas, gráficos) nunca deben exceder el ancho del texto */
+.post article img,
+.post .post-content img,
+article img {
+  max-width: 100%;
+  height: auto;
+}
