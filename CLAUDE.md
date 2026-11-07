@@ -46,6 +46,8 @@ token (cada 60 días) y detalles: `.linkedin/README.md`.
 - Para sumar un post a la cola: `python3 bin/linkedin_post.py --enqueue slug-1 slug-2 ...`; ver lo que saldría:
   `python3 bin/linkedin_post.py --plan`. No editar `posted.json` a mano salvo para reenviar u omitir un post.
 - Corrida de prueba: `gh workflow run linkedin.yml` (por defecto es simulación y no llama a LinkedIn).
+- `bin/linkedin_activate.sh` (setup, status, enable, pause) lo corre **Matías** en su terminal: ahí pasa el token. No
+  ejecutarlo ni reproducir sus pasos por él. Modo del link: variable `LINKEDIN_LINK_MODE` (`card` por defecto, o `comment`).
 - Si el workflow falla con 401 o avisa que el token vence, avisarle a Matías: solo él puede generar el token.
 
 ## Reglas

@@ -23,6 +23,7 @@ class Mock(BaseHTTPRequestHandler):
     live = {"/posts/2026/nuevo/", "/posts/2026/uno/", "/posts/2026/dos/", "/posts/2026/tres/",
             "/posts/2026/cuatro/", "/posts/2026/cinco/", "/posts/2026/custom/"}
     post_status = 201
+    comment_status = 201
 
     def _body(self):
         n = int(self.headers.get("Content-Length") or 0)
@@ -53,6 +54,8 @@ class Mock(BaseHTTPRequestHandler):
             port = self.server.server_port
             return self._send(200, {"value": {"uploadUrl": f"http://127.0.0.1:{port}/upload/1",
                                               "image": "urn:li:image:IMG1"}})
+        if self.path.startswith("/rest/socialActions/"):
+            return self._send(Mock.comment_status, {"id": "c1"} if Mock.comment_status == 201 else {"message": "no"})
         if self.path == "/rest/posts":
             if Mock.post_status != 201:
                 return self._send(Mock.post_status, {"message": "nope"})
@@ -78,6 +81,7 @@ class Base(unittest.TestCase):
     def setUp(self):
         Mock.log = []
         Mock.post_status = 201
+        Mock.comment_status = 201
         self.srv = HTTPServer(("127.0.0.1", 0), Mock)
         threading.Thread(target=self.srv.serve_forever, daemon=True).start()
         self.base = f"http://127.0.0.1:{self.srv.server_port}"
@@ -94,7 +98,7 @@ class Base(unittest.TestCase):
                            "LINKEDIN_PAUSE": "0", "LINKEDIN_API_VERSION": "202610",
                            "LINKEDIN_MAX_PER_DAY": "10"})
         for k in ("LINKEDIN_ACCESS_TOKEN", "LINKEDIN_PERSON_ID", "LINKEDIN_TOKEN_EXPIRES_AT", "DRY_RUN", "LINKEDIN_ENABLED",
-                  "GITHUB_STEP_SUMMARY", "MAX_POSTS_PER_RUN"):
+                  "GITHUB_STEP_SUMMARY", "MAX_POSTS_PER_RUN", "LINKEDIN_LINK_MODE"):
             os.environ.pop(k, None)
 
     def tearDown(self):
@@ -346,6 +350,37 @@ class Flujo(Base):
         self.assertIn("{hashtag|\\#|IAagéntica}", out)
         self.assertIn("\\(paréntesis\\)", out)
         self.assertEqual(Mock.log, [])
+
+    def test_modo_comentario_link_en_el_primer_comentario(self):
+        os.environ["LINKEDIN_LINK_MODE"] = "comment"
+        self.add("nuevo", post_md("Nuevo"))
+        self.login()
+        rc, out, _ = self.run_main()
+        self.assertEqual(rc, 0, out)
+        kinds = [(m, p.split("?")[0]) for m, p, _, _ in Mock.log]
+        self.assertEqual(kinds[:3], [("POST", "/rest/images"), ("PUT", "/upload/1"), ("POST", "/rest/posts")])
+        self.assertTrue(kinds[3][1].startswith("/rest/socialActions/urn%3Ali%3Ashare%3A"), kinds[3])
+        self.assertTrue(kinds[3][1].endswith("/comments"))
+        post = json.loads(Mock.log[2][3])
+        self.assertNotIn("article", post.get("content", {}))
+        self.assertEqual(post["content"]["media"]["id"], "urn:li:image:IMG1")
+        self.assertNotIn("http", post["commentary"])  # el link no va en el cuerpo
+        comment = json.loads(Mock.log[3][3])
+        self.assertEqual(comment["actor"], "urn:li:person:abc123")
+        self.assertTrue(comment["object"].startswith("urn:li:share:"))
+        self.assertIn(f"{self.base}/posts/2026/nuevo/", comment["message"]["text"])
+
+    def test_modo_comentario_si_falla_el_comentario(self):
+        os.environ["LINKEDIN_LINK_MODE"] = "comment"
+        Mock.comment_status = 403
+        self.add("nuevo", post_md("Nuevo"))
+        self.login()
+        rc, out, _ = self.run_main()
+        self.assertEqual(rc, 1)
+        entry = self.ledger()["posts"]["nuevo"]
+        self.assertEqual(entry["status"], "posted")  # el post existe: no se reintenta
+        self.assertIn("403", entry["comment_error"])
+        self.assertIn("Pegá el link a mano", out)
 
     def test_whoami(self):
         self.login()

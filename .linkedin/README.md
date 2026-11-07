@@ -36,16 +36,15 @@ No toca el sitio: el deploy es otro workflow (`pages.yml`).
    OpenID Connect** (da `openid` y `profile`).
 3. **Token**: https://www.linkedin.com/developers/tools/oauth/token-generator → tu app → permisos `openid`,
    `profile` y `w_member_social`. **Dura 60 días.**
-4. **Tu id de miembro**: `LINKEDIN_ACCESS_TOKEN='...' python3 bin/linkedin_post.py --whoami`
-5. **Secretos**:
-   ```bash
-   gh secret set LINKEDIN_ACCESS_TOKEN
-   gh secret set LINKEDIN_PERSON_ID
-   gh variable set LINKEDIN_TOKEN_EXPIRES_AT --body AAAA-MM-DD   # hoy + 60 días
-   ```
-6. **Probar sin publicar**: `gh workflow run linkedin.yml` (por defecto es simulación) y mirar el log.
-7. **Revisar los textos**: `python3 bin/linkedin_post.py --plan` muestra cada salida tal como se enviaría.
-8. **Encender**: `gh variable set LINKEDIN_ENABLED --body true`. **Apagar**: `... --body false`.
+4. **Cargar todo con el asistente**: `bin/linkedin_activate.sh setup`. Te pide el token (no se muestra), verifica con
+   LinkedIn que sea tu cuenta, lo guarda junto con tu id como secretos de GitHub, fija el vencimiento y lanza una
+   simulación. **No enciende nada.**
+5. **Revisar**: la simulación en la pestaña *Actions* y los textos con `python3 bin/linkedin_post.py --plan`.
+6. **Encender**: `bin/linkedin_activate.sh enable` muestra la cola y activa la publicación diaria solo si escribís
+   `ENCENDER`. **Apagar**: `bin/linkedin_activate.sh pause`. Ver el estado: `bin/linkedin_activate.sh status`.
+
+(A mano sería: `gh secret set LINKEDIN_ACCESS_TOKEN`, `gh secret set LINKEDIN_PERSON_ID`,
+`gh variable set LINKEDIN_TOKEN_EXPIRES_AT --body AAAA-MM-DD` y `gh variable set LINKEDIN_ENABLED --body true`.)
 
 ## Cola y textos
 
@@ -55,10 +54,13 @@ No toca el sitio: el deploy es otro workflow (`pages.yml`).
   reservados de LinkedIn se escapa solo. Sin `linkedin_text`, el texto es «Nuevo en el blog: {título}» más la
   descripción.
 - `linkedin: false` saca un post de LinkedIn.
-- Tus reglas de voz (`~/.claude/linkedin-shared/voice-rules.md`) piden **el link en el primer comentario y no en
-  el cuerpo**. Hoy el link va dentro del post, como tarjeta de artículo (el texto no lo repite). Pasarlo a un
-  comentario requiere el permiso `w_member_social_feed` de la API de comentarios, que no se pudo confirmar que
-  esté disponible para una app sin aprobación. **Decisión pendiente.**
+- **Dónde va el link.** Por defecto (`card`) va dentro del post como tarjeta de artículo y el texto no lo repite.
+  Tus reglas de voz piden el link en el primer comentario: está disponible con
+  `gh variable set LINKEDIN_LINK_MODE --body comment` (el post sale con la imagen y el script comenta el link
+  enseguida). Ese modo necesita el permiso `w_member_social_feed` de la API de comentarios, que no se pudo
+  confirmar que tu app lo obtenga sin aprobación de LinkedIn, y **no se probó contra LinkedIn real**. Si el
+  comentario falla, el post igual queda publicado (no se reintenta, para no duplicarlo), el job falla para avisarte
+  y el log trae el link para pegarlo a mano. Recomendación: probar primero con `card`.
 
 ## Renovar el token (cada 60 días)
 

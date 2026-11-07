@@ -36,6 +36,7 @@ jobs:
           LINKEDIN_TOKEN_EXPIRES_AT: ${{ vars.LINKEDIN_TOKEN_EXPIRES_AT }}
           LINKEDIN_API_VERSION: "202610"
           LINKEDIN_MAX_PER_DAY: "1"
+          LINKEDIN_LINK_MODE: ${{ vars.LINKEDIN_LINK_MODE }} # card (default) o comment
           DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && '1' || '' }}
         run: python3 bin/linkedin_post.py
       - name: Guardar el registro de publicaciones

@@ -33,6 +33,7 @@ import re
 import sys
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
@@ -50,6 +51,9 @@ MAX_COMMENTARY = 3000
 MAX_PER_RUN_DEFAULT = 3
 PAUSE = float(os.environ.get("LINKEDIN_PAUSE") or 2)  # segundos entre posts
 MAX_PER_DAY = int(os.environ.get("LINKEDIN_MAX_PER_DAY") or 1)  # tope diario (día del sitio)
+# card: el link va dentro del post (tarjeta de artículo). comment: el post lleva la imagen y el link
+# va en el primer comentario (pide el permiso w_member_social_feed). Default: card.
+LINK_MODE = (os.environ.get("LINKEDIN_LINK_MODE") or "card").strip().lower()
 
 
 class LinkedInError(Exception):
@@ -207,12 +211,7 @@ def build_commentary(post: dict) -> str:
 
 
 def build_post_body(post: dict, person_urn: str, thumbnail_urn: str | None) -> dict:
-    article = {"source": post["url"], "title": clip(post["title"], 200)}
-    if post["description"].strip():  # LinkedIn rechaza campos de texto en blanco
-        article["description"] = clip(post["description"], 250)
-    if thumbnail_urn:
-        article["thumbnail"] = thumbnail_urn
-    return {
+    body = {
         "author": person_urn,
         "commentary": build_commentary(post),
         "visibility": "PUBLIC",
@@ -221,10 +220,20 @@ def build_post_body(post: dict, person_urn: str, thumbnail_urn: str | None) -> d
             "targetEntities": [],
             "thirdPartyDistributionChannels": [],
         },
-        "content": {"article": article},
         "lifecycleState": "PUBLISHED",
         "isReshareDisabledByAuthor": False,
     }
+    if LINK_MODE == "comment":
+        if thumbnail_urn:  # imagen en el post; el link va después, en un comentario
+            body["content"] = {"media": {"id": thumbnail_urn, "title": clip(post["title"], 200)}}
+        return body
+    article = {"source": post["url"], "title": clip(post["title"], 200)}
+    if post["description"].strip():  # LinkedIn rechaza campos de texto en blanco
+        article["description"] = clip(post["description"], 250)
+    if thumbnail_urn:
+        article["thumbnail"] = thumbnail_urn
+    body["content"] = {"article": article}
+    return body
 
 
 # ------------------------------------------------------------------------ HTTP
@@ -270,7 +279,13 @@ def upload_thumbnail(path: Path, person_urn: str, token: str) -> str:
     return value["image"]
 
 
-def publish(post: dict, person_urn: str, token: str) -> str:
+def comment_on(post_urn: str, person_urn: str, post: dict, token: str) -> None:
+    api("POST", f"/rest/socialActions/{urllib.parse.quote(post_urn, safe='')}/comments", token,
+        {"actor": person_urn, "object": post_urn, "message": {"text": f"El artículo completo: {post['url']}"}})
+
+
+def publish(post: dict, person_urn: str, token: str) -> tuple[str, str | None]:
+    """Devuelve (urn del post, error del comentario o None)."""
     thumb_urn = None
     thumb_path = ROOT / str(post["thumbnail"]).lstrip("/") if post["thumbnail"] else None
     if thumb_path and thumb_path.exists():
@@ -279,7 +294,13 @@ def publish(post: dict, person_urn: str, token: str) -> str:
         gh("warning", f"{post['slug']}: sin miniatura utilizable; se publica sin imagen")
     body = build_post_body(post, person_urn, thumb_urn)
     _, hdrs, _ = api("POST", "/rest/posts", token, body)
-    return hdrs.get("x-restli-id", "")
+    urn, cerr = hdrs.get("x-restli-id", ""), None
+    if LINK_MODE == "comment":
+        try:
+            comment_on(urn, person_urn, post, token)
+        except LinkedInError as e:
+            cerr = str(e)
+    return urn, cerr
 
 
 def url_is_live(url: str, attempts: int = 3, wait: int = 20) -> bool:
@@ -459,7 +480,7 @@ def main(argv: list[str] | None = None) -> int:
                 gh("warning", f"{p['slug']}: la URL todavía no responde 200; se reintenta en la próxima corrida")
                 continue
             try:
-                urn = publish(p, person, token)
+                urn, cerr = publish(p, person, token)
             except LinkedInError as e:
                 if e.status == 401:
                     gh("error", "LinkedIn rechazó el token (401): vencido o revocado. Generá uno nuevo (ver .linkedin/README.md)")
@@ -473,9 +494,15 @@ def main(argv: list[str] | None = None) -> int:
                 "url": p["url"],
                 "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             }
+            if cerr:
+                ledger["posts"][p["slug"]]["comment_error"] = cerr
             save_ledger(ledger)  # se guarda ya mismo: evita duplicados si falla algo después
             done.append(p["slug"])
             log(f"publicado: {p['slug']} -> {urn}")
+            if cerr:
+                gh("error", f"{p['slug']}: el post salió pero el comentario con el link falló ({cerr}). Pegá el link a mano: {p['url']}")
+                rc = 1
+                break
             time.sleep(PAUSE)
 
     if days is not None and days <= 10:
