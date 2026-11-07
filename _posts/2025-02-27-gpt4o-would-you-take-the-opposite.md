@@ -4,6 +4,7 @@ title: "gpt4o: \"Would you take the opposite bet?\""
 date: 2025-02-27 19:30:25 -0300
 description: "4o advice me not to trust 4.5"
 image: /assets/img/gpt4o-would-you-take-the-opposite/00.png
+thumbnail: /assets/img/gpt4o-would-you-take-the-opposite/thumb.jpg
 substack_url: "https://matiaszz.substack.com/p/gpt4o-would-you-take-the-opposite"
 ---
 

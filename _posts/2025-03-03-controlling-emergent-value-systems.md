@@ -3,6 +3,7 @@ layout: post
 title: "Controlling Emergent Value Systems in AI: Key Takeaways from “Utility Engineering”"
 date: 2025-03-03 09:33:32 -0300
 description: "In our race toward ever more capable AI systems, ensuring that these machines behave as intended becomes increasingly critical."
+thumbnail: /assets/img/controlling-emergent-value-systems/thumb.jpg
 substack_url: "https://matiaszz.substack.com/p/controlling-emergent-value-systems"
 ---
 

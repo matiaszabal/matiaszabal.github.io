@@ -3,6 +3,7 @@ layout: post
 title: "El peligro silencioso de Cedar en la IA Agéntica"
 date: 2026-10-27 00:47:27 -0300
 description: "Cómo la combinación de políticas schemaless, el operador in y la semántica de tolerancia a errores abren puertas traseras invisibles en los agentes autónomos modernos."
+thumbnail: /assets/img/el-peligro-silencioso-de-cedar-en/thumb.jpg
 substack_url: "https://matiaszz.substack.com/p/el-peligro-silencioso-de-cedar-en"
 ---
 

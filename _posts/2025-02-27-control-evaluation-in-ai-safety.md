@@ -4,6 +4,7 @@ title: "Control Evaluation in AI Safety"
 date: 2025-02-27 05:47:15 -0300
 description: "Control Evaluation in AI Safety"
 image: /assets/img/control-evaluation-in-ai-safety/00.png
+thumbnail: /assets/img/control-evaluation-in-ai-safety/thumb.jpg
 substack_url: "https://matiaszz.substack.com/p/control-evaluation-in-ai-safety"
 ---
 

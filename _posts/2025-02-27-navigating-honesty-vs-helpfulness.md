@@ -4,6 +4,7 @@ title: "Navigating Honesty vs. Helpfulness in LLMs: Key Insights from Liu et al.
 date: 2025-02-27 15:37:09 -0300
 description: "Abstract: Large Language Models (LLMs) face a fundamental trade-off between honesty and helpfulness. A recent paper by Ryan Liu et al. (2024) – “How do Large Language Models Navigate Conflicts between Honesty and Helpfulness?” (How do Large Language Models Navigate Conflicts between Honesty and Helpfulness?"
 image: /assets/img/navigating-honesty-vs-helpfulness/00.png
+thumbnail: /assets/img/navigating-honesty-vs-helpfulness/thumb.jpg
 substack_url: "https://matiaszz.substack.com/p/navigating-honesty-vs-helpfulness"
 ---
 

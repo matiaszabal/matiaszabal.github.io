@@ -4,6 +4,7 @@ title: "New Critical Review: Emergent Misalignment in LLMs"
 date: 2025-03-03 20:55:04 -0300
 description: "Just for self-learning purpose"
 image: /assets/img/new-critical-review-emergent-misalignment/00.png
+thumbnail: /assets/img/new-critical-review-emergent-misalignment/thumb.jpg
 substack_url: "https://matiaszz.substack.com/p/new-critical-review-emergent-misalignment"
 ---
 

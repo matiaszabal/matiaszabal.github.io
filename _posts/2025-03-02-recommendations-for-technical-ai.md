@@ -4,6 +4,7 @@ title: "Recommendations for Technical AI Safety Research Directions"
 date: 2025-03-02 08:59:17 -0300
 description: "https://alignment.anthropic.com/2025/recommended-directions/"
 image: /assets/img/recommendations-for-technical-ai/00.png
+thumbnail: /assets/img/recommendations-for-technical-ai/thumb.jpg
 substack_url: "https://matiaszz.substack.com/p/recommendations-for-technical-ai"
 ---
 

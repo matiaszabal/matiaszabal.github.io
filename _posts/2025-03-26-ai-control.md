@@ -3,6 +3,7 @@ layout: post
 title: "AI Control"
 date: 2025-03-26 00:03:15 -0300
 description: "As a critical component of AI Safety"
+thumbnail: /assets/img/ai-control/thumb.jpg
 substack_url: "https://matiaszz.substack.com/p/ai-control"
 ---
 

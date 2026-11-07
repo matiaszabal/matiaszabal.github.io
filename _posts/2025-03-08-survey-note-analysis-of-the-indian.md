@@ -3,6 +3,7 @@ layout: post
 title: "Survey Note: Analysis of the Indian AI Competency Framework and Its Adaptation to Argentina and Latin America"
 date: 2025-03-08 04:46:08 -0300
 description: "This document provides an in-depth examination of the Empowering Public Sector Leadership: A Competency Framework for AI Integration in India and explores its adaptation to Argentina and Latin America."
+thumbnail: /assets/img/survey-note-analysis-of-the-indian/thumb.jpg
 substack_url: "https://matiaszz.substack.com/p/survey-note-analysis-of-the-indian"
 ---
 

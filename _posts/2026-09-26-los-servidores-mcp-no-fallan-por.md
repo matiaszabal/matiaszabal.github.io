@@ -4,6 +4,7 @@ title: "MCP SoK: Beyond the Threat Catalog"
 date: 2026-09-26 18:17:15 -0300
 description: "Resumen de “SoK: Beyond the Threat Catalog — An Empirical Taxonomy of Authorization Governance and Containment Failures in Model Context Protocol Servers”"
 image: /assets/img/los-servidores-mcp-no-fallan-por/00.png
+thumbnail: /assets/img/los-servidores-mcp-no-fallan-por/thumb.jpg
 substack_url: "https://matiaszz.substack.com/p/los-servidores-mcp-no-fallan-por"
 ---
 

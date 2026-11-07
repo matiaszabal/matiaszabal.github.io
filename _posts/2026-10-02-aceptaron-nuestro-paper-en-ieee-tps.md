@@ -4,6 +4,7 @@ title: "Aceptaron nuestro paper en IEEE TPS 2026: qué dice RLMS-Shield y qué n
 date: 2026-10-02 17:02:44 -0300
 description: "RLMS-Shield: The Abstention Frontier and Peer-Prediction Auditing for Automated LLM Red-Teaming"
 image: /assets/img/aceptaron-nuestro-paper-en-ieee-tps/00.png
+thumbnail: /assets/img/aceptaron-nuestro-paper-en-ieee-tps/thumb.jpg
 substack_url: "https://matiaszz.substack.com/p/aceptaron-nuestro-paper-en-ieee-tps"
 ---
 

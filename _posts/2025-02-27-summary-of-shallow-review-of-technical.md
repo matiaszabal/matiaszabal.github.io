@@ -4,6 +4,7 @@ title: "Summary of Shallow Review of Technical AI Safety, 2024 (LessWrong)"
 date: 2025-02-27 09:22:45 -0300
 description: "This Shallow Review provides an overview of ongoing research agendas in technical AI safety as of 2024, categorizing efforts into key domains."
 image: /assets/img/summary-of-shallow-review-of-technical/00.png
+thumbnail: /assets/img/summary-of-shallow-review-of-technical/thumb.jpg
 substack_url: "https://matiaszz.substack.com/p/summary-of-shallow-review-of-technical"
 ---
 
