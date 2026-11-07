@@ -1,6 +1,6 @@
 # Blog de Matías: reglas para publicar
 
-Sitio Jekyll con el tema al-folio en GitHub Pages (`matiaszabal.github.io`). URLs de posts: `/blog/AAAA/titulo/`. Audiencia: colegas de IA agéntica.
+Sitio Jekyll con el tema al-folio en GitHub Pages (`matiaszabal.github.io`). URLs de posts: `/posts/AAAA/titulo/`. Audiencia: colegas de IA agéntica.
 Cada push a `main` despliega solo con GitHub Actions.
 
 ## Flujo para un artículo nuevo
