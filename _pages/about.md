@@ -11,7 +11,7 @@ profile:
     <p>Coordinador Académico, UTDT</p>
     <p>Profesor de posgrado, UNLP</p>
 
-selected_papers: true
+selected_papers: false
 social: true
 
 announcements:

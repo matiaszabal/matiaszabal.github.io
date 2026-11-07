@@ -3,7 +3,7 @@ layout: page
 permalink: /publications/
 title: publicaciones
 description: trabajos académicos, en orden cronológico inverso.
-nav: true
+nav: false
 nav_order: 2
 ---
 
