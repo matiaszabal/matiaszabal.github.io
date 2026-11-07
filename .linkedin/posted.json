@@ -9,10 +9,16 @@
     "ai-control": {
       "status": "baseline"
     },
+    "aprender-sin-tocar-pesos-few-shot-dinamico-expel-y-reflexion": {
+      "status": "baseline"
+    },
     "control-evaluation-in-ai-safety": {
       "status": "baseline"
     },
     "controlling-emergent-value-systems": {
+      "status": "baseline"
+    },
+    "crear-un-agente-a-partir-de-un-arquetipo-sin-escribir-el-codigo": {
       "status": "baseline"
     },
     "el-peligro-silencioso-de-cedar-en": {
@@ -43,6 +49,9 @@
       "status": "baseline"
     },
     "new-critical-review-emergent-misalignment": {
+      "status": "baseline"
+    },
+    "orquestacion-en-adk-2-grafos-agentes-colaborativos-y-workflows-dinamicos": {
       "status": "baseline"
     },
     "por-que-un-curso-de-agentes-empieza-por-criterio-y-no-por-codigo": {
