@@ -47,7 +47,9 @@ token (cada 60 días) y detalles: `.linkedin/README.md`.
   `python3 bin/linkedin_post.py --plan`. No editar `posted.json` a mano salvo para reenviar u omitir un post.
 - Corrida de prueba: `gh workflow run linkedin.yml` (por defecto es simulación y no llama a LinkedIn).
 - `bin/linkedin_activate.sh` (setup, status, enable, pause) lo corre **Matías** en su terminal: ahí pasa el token. No
-  ejecutarlo ni reproducir sus pasos por él. Modo del link: variable `LINKEDIN_LINK_MODE` (`card` por defecto, o `comment`).
+  ejecutarlo ni reproducir sus pasos por él. Modo del link: variable `LINKEDIN_LINK_MODE` (`card` por defecto, o `comment`). En modo `comment` el script agrega solo
+  la línea que avisa que el link está en el primer comentario: no ponerla a mano en `linkedin_text`.
+  `bin/linkedin_activate.sh test-first` publica solo el primer post de la cola y vuelve a pausar (también lo corre Matías).
 - Si el workflow falla con 401 o avisa que el token vence, avisarle a Matías: solo él puede generar el token.
 
 ## Reglas

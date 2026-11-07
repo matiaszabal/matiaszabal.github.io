@@ -43,6 +43,11 @@ No toca el sitio: el deploy es otro workflow (`pages.yml`).
 6. **Encender**: `bin/linkedin_activate.sh enable` muestra la cola y activa la publicación diaria solo si escribís
    `ENCENDER`. **Apagar**: `bin/linkedin_activate.sh pause`. Ver el estado: `bin/linkedin_activate.sh status`.
 
+**Probar con el primer post antes de encender la cola**: después de `setup`, `bin/linkedin_activate.sh test-first`.
+Pregunta si el link va en el primer comentario o en la tarjeta, muestra el texto exacto y, si escribís `PUBLICAR`,
+publica **solo el primer post de la cola** (hoy, el del MIT), espera a que termine y **vuelve a dejar todo
+pausado**. Después mirás el post en LinkedIn y el log; si todo está bien, `enable` activa un post por día.
+
 (A mano sería: `gh secret set LINKEDIN_ACCESS_TOKEN`, `gh secret set LINKEDIN_PERSON_ID`,
 `gh variable set LINKEDIN_TOKEN_EXPIRES_AT --body AAAA-MM-DD` y `gh variable set LINKEDIN_ENABLED --body true`.)
 
@@ -54,6 +59,9 @@ No toca el sitio: el deploy es otro workflow (`pages.yml`).
   reservados de LinkedIn se escapa solo. Sin `linkedin_text`, el texto es «Nuevo en el blog: {título}» más la
   descripción.
 - `linkedin: false` saca un post de LinkedIn.
+- **Aviso del link en el texto.** En modo `comment` el script agrega solo la línea «El artículo completo está en el
+  primer comentario.» antes de los hashtags (o al final si no hay). En modo `card` no agrega nada. Los
+  `linkedin_text` de los posts no se tocan.
 - **Dónde va el link.** Por defecto (`card`) va dentro del post como tarjeta de artículo y el texto no lo repite.
   Tus reglas de voz piden el link en el primer comentario: está disponible con
   `gh variable set LINKEDIN_LINK_MODE --body comment` (el post sale con la imagen y el script comenta el link

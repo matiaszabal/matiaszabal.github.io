@@ -185,6 +185,20 @@ class Unitarias(Base):
         self.assertEqual(m.to_little("Hola #IA agéntica (v2) #1 y a#b"),
                          "Hola {hashtag|\\#|IA} agéntica \\(v2\\) \\#1 y a\\#b")
 
+    def test_modo_comentario_avisa_donde_esta_el_link(self):
+        extra = 'linkedin_text: "Cuerpo.\\n\\n¿Pregunta?\\n\\n#IA #ADK"\n'
+        self.add("nuevo", post_md("T", extra=extra))
+        os.environ["LINKEDIN_LINK_MODE"] = "comment"
+        m = self.mod()
+        c = m.build_commentary(m.load_posts(m.read_config())[0])
+        self.assertEqual(c, "Cuerpo.\n\n¿Pregunta?\n\nEl artículo completo está en el primer comentario."
+                            "\n\n{hashtag|\\#|IA} {hashtag|\\#|ADK}")
+        os.environ["LINKEDIN_LINK_MODE"] = "card"  # en modo tarjeta el link ya está en el post: no se agrega nada
+        m = self.mod()
+        c = m.build_commentary(m.load_posts(m.read_config())[0])
+        self.assertNotIn("primer comentario", c)
+        self.assertTrue(c.startswith("Cuerpo.\n\n¿Pregunta?"))
+
     def test_vencimiento_del_token(self):
         m = self.mod()
         os.environ["LINKEDIN_TOKEN_EXPIRES_AT"] = (date.today() + timedelta(days=7)).isoformat()

@@ -200,6 +200,20 @@ def clip(text: str, limit: int) -> str:
     return text if len(text) <= limit else text[: limit - 1].rstrip() + "…"
 
 
+POINTER = "El artículo completo está en el primer comentario."
+HASHTAG_LINE = re.compile(r"^(#[^\W_]+\s*)+$")
+
+
+def add_pointer(plain: str) -> str:
+    """Avisa dónde está el link (solo en modo comment), antes de la línea de hashtags si la hay."""
+    parts = plain.rstrip().split("\n\n")
+    if parts and HASHTAG_LINE.match(parts[-1].strip()):
+        parts.insert(len(parts) - 1, POINTER)
+    else:
+        parts.append(POINTER)
+    return "\n\n".join(parts)
+
+
 def build_commentary(post: dict) -> str:
     if post["custom_text"]:
         plain = str(post["custom_text"])
@@ -207,7 +221,10 @@ def build_commentary(post: dict) -> str:
         plain = f"Nuevo en el blog: {post['title']}"
         if post["description"]:
             plain += f"\n\n{post['description']}"
-    return to_little(clip(plain, MAX_COMMENTARY // 2))
+    plain = clip(plain, MAX_COMMENTARY // 2 - 100)
+    if LINK_MODE == "comment":
+        plain = add_pointer(plain)
+    return to_little(plain)
 
 
 def build_post_body(post: dict, person_urn: str, thumbnail_urn: str | None) -> dict:

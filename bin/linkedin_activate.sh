@@ -4,6 +4,7 @@
 #
 #   bin/linkedin_activate.sh setup    carga token y secretos y prueba en simulación (no publica)
 #   bin/linkedin_activate.sh status   muestra qué está configurado
+#   bin/linkedin_activate.sh test-first   publica SOLO el primer post de la cola, ahora, y deja todo pausado
 #   bin/linkedin_activate.sh enable   muestra la cola y, si escribís ENCENDER, activa la publicación diaria
 #   bin/linkedin_activate.sh pause    apaga la publicación diaria
 set -euo pipefail
@@ -30,6 +31,26 @@ case "${1:-help}" in
     echo "Listo. La publicación sigue PAUSADA: nada sale hasta que corras '$0 enable'."
     echo "Revisá la simulación en la pestaña Actions (workflow «LinkedIn (1 post por día)»)."
     ;;
+  test-first)
+    "$GH" secret list | grep -q LINKEDIN_ACCESS_TOKEN || { echo "Falta el token: corré primero '$0 setup'."; exit 1; }
+    read -rp "¿Link en el primer comentario (c) o dentro del post como tarjeta (t)? [c]: " M
+    MODE=comment; [ "${M:-c}" = "t" ] && MODE=card
+    LINKEDIN_LINK_MODE=$MODE "$PY" bin/linkedin_post.py --plan | sed -n '1,40p'
+    echo
+    echo "Se publicará SOLO el primer post de la cola, ahora, en tu LinkedIn (modo: $MODE). Después queda todo pausado."
+    read -rp "Para publicarlo escribí PUBLICAR: " C
+    [ "$C" = "PUBLICAR" ] || { echo "No se publicó nada."; exit 1; }
+    "$GH" variable set LINKEDIN_LINK_MODE --body "$MODE"
+    "$GH" variable set LINKEDIN_ENABLED --body true
+    "$GH" workflow run linkedin.yml -f dry_run=false
+    sleep "${LINKEDIN_WAIT:-15}"
+    ID=$("$GH" run list --workflow linkedin.yml --limit 1 --json databaseId --jq '.[0].databaseId')
+    "$GH" run watch "$ID" --exit-status || echo "El workflow terminó con error: mirá el log."
+    "$GH" variable set LINKEDIN_ENABLED --body false
+    echo
+    echo "Pausado de nuevo. Revisá el post en LinkedIn y el log: gh run view $ID --log"
+    echo "Si salió bien, '$0 enable' activa un post por día; si no, no se publicó nada más."
+    ;;
   status)
     echo "Secretos:";   "$GH" secret list   | grep -i linkedin || echo "  (ninguno)"
     echo "Variables:";  "$GH" variable list | grep -i linkedin || echo "  (ninguna)"
@@ -49,6 +70,6 @@ case "${1:-help}" in
     echo "Pausado: no se publica nada hasta que vuelvas a correr '$0 enable'."
     ;;
   *)
-    sed -n '2,9p' "$0" | sed 's/^# \{0,1\}//'
+    sed -n '2,10p' "$0" | sed 's/^# \{0,1\}//'
     ;;
 esac
