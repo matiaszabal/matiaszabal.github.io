@@ -16,19 +16,22 @@
       "status": "baseline"
     },
     "evaluar-agentes-en-adk-lo-que-ya-viene-nativo": {
-      "status": "baseline"
+      "order": 4,
+      "status": "queued"
     },
     "gpt4o-would-you-take-the-opposite": {
       "status": "baseline"
     },
     "las-empresas-dicen-que-mitigan-riesgos-de-ia": {
-      "status": "baseline"
+      "order": 1,
+      "status": "queued"
     },
     "los-servidores-mcp-no-fallan-por": {
       "status": "baseline"
     },
     "memoria-en-adk-cuatro-capas": {
-      "status": "baseline"
+      "order": 3,
+      "status": "queued"
     },
     "navigating-honesty-vs-helpfulness": {
       "status": "baseline"
@@ -40,7 +43,8 @@
       "status": "baseline"
     },
     "seguridad-y-gobernanza-en-arquitectura-de-ia-agentica": {
-      "status": "baseline"
+      "order": 2,
+      "status": "queued"
     },
     "summary-of-shallow-review-of-technical": {
       "status": "baseline"

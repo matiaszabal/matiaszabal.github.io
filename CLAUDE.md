@@ -11,9 +11,8 @@ Cada push a `main` despliega solo con GitHub Actions.
 3. Para publicar: mover a `_posts/AAAA-MM-DD-titulo.md`, commit y push a `main`.
    Fecha futura en el front matter = publicación programada (el sitio se reconstruye a diario).
 4. Verificar: `gh run watch` hasta que termine en verde, luego abrir la URL del post y `/feed.xml`.
-5. **Publicar un post también lo publica en LinkedIn, solo y sin confirmación** (job `linkedin`, ver abajo).
-   Es público e irreversible: por eso el "publicalo" de Matías cubre las dos cosas.
-6. Después de cada publicación, el robot agrega un commit a `main` (`LinkedIn: registrar publicaciones`).
+5. Publicar el post en el blog **no** lo publica en LinkedIn: eso lo maneja la cola diaria (ver abajo) y hoy está pausada.
+6. Cuando LinkedIn esté activo, el robot agrega un commit a `main` (`LinkedIn: registrar publicaciones`).
    Hacer `git pull --rebase origin main` antes del próximo push.
 
 ## Front matter
@@ -30,22 +29,24 @@ tags: [agentes, evaluación]
 ---
 ```
 
-## LinkedIn automático
+## LinkedIn automático (1 post por día, hoy PAUSADO)
 
-Tras cada deploy, `bin/linkedin_post.py` publica en el perfil de Matías los posts cuyo slug no figure en
-`.linkedin/posted.json`. Puesta en marcha, renovación del token (cada 60 días) y detalles: `.linkedin/README.md`.
+`.github/workflows/linkedin.yml` publica a las 09:30 (Argentina) como máximo UN post por día en el perfil de
+Matías: primero la cola de `.linkedin/posted.json`, después los posts nuevos. Puesta en marcha, cola, renovación del
+token (cada 60 días) y detalles: `.linkedin/README.md`.
 
-- **Al crear un post, escribir `linkedin_text`**: un gancho de 2 a 4 líneas en la voz de Matías, pensado para
-  LinkedIn y no un copia y pega del resumen (usar los skills `linkedin-post-writer` y `linkedin-humanizer`).
-  No escapar caracteres a mano: el script lo hace. Sin `linkedin_text`, el texto por defecto es
-  «Nuevo en el blog: {título}» más la descripción.
-- `linkedin: false` en el front matter evita que un post salga en LinkedIn.
-- Todo post necesita `thumbnail` (miniatura 4:3): LinkedIn no lee el link, el script le manda esa imagen.
-- No editar `.linkedin/posted.json` a mano, salvo para reenviar un post (borrar su entrada) o para omitir uno
-  (agregar `"slug": {"status": "baseline"}`).
-- Corrida de prueba sin publicar: `gh workflow run pages.yml -f linkedin_dry_run=true`.
-- Si el job `linkedin` falla con 401 o avisa que el token está por vencer, avisarle a Matías: solo él puede
-  generar el token nuevo.
+- **Está pausado.** Sin credenciales y sin `LINKEDIN_ENABLED=true` no se publica nada. **Nunca activarlo, cargar
+  secretos ni cambiar `LINKEDIN_ENABLED` sin que Matías lo pida.** Publicar en su cuenta es público e irreversible.
+- Los textos de LinkedIn necesitan **su aprobación explícita** antes de encenderlo (sus reglas de voz lo exigen).
+- **Al crear un post, escribir `linkedin_text`** con los skills `linkedin-post-writer` y `linkedin-humanizer`:
+  gancho con cifra y fuente en los primeros 210 caracteres, sin link en el cuerpo, 0 a 2 hashtags al final, sin
+  inventar nada (perfil de voz y banco de historias siguen en `filled: no`: no hay anécdotas personales para usar).
+  Las `#etiquetas` se vuelven hashtags reales; los demás caracteres reservados se escapan solos.
+- `linkedin: false` saca un post de LinkedIn. Todo post necesita `thumbnail` (4:3).
+- Para sumar un post a la cola: `python3 bin/linkedin_post.py --enqueue slug-1 slug-2 ...`; ver lo que saldría:
+  `python3 bin/linkedin_post.py --plan`. No editar `posted.json` a mano salvo para reenviar u omitir un post.
+- Corrida de prueba: `gh workflow run linkedin.yml` (por defecto es simulación y no llama a LinkedIn).
+- Si el workflow falla con 401 o avisa que el token vence, avisarle a Matías: solo él puede generar el token.
 
 ## Reglas
 

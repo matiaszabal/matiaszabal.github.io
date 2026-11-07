@@ -1,0 +1,51 @@
+name: LinkedIn (1 post por día)
+
+# Publica como máximo UN post por día, tomando primero la cola de .linkedin/posted.json
+# y después los posts nuevos del blog. No toca el sitio. Ver .linkedin/README.md
+on:
+  schedule:
+    - cron: "30 12 * * *" # 12:30 UTC = 09:30 en Argentina (GitHub puede demorarlo unos minutos)
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Solo mostrar lo que publicaría, sin llamar a LinkedIn"
+        type: boolean
+        default: true
+
+permissions:
+  contents: write # para guardar .linkedin/posted.json
+
+concurrency:
+  group: linkedin
+  cancel-in-progress: false
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Cola y texto exacto de cada salida
+        run: python3 bin/linkedin_post.py --plan
+      - name: Publicar el post del día en LinkedIn
+        env:
+          LINKEDIN_ENABLED: ${{ vars.LINKEDIN_ENABLED }}
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_PERSON_ID: ${{ secrets.LINKEDIN_PERSON_ID }}
+          LINKEDIN_TOKEN_EXPIRES_AT: ${{ vars.LINKEDIN_TOKEN_EXPIRES_AT }}
+          LINKEDIN_API_VERSION: "202610"
+          LINKEDIN_MAX_PER_DAY: "1"
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && '1' || '' }}
+        run: python3 bin/linkedin_post.py
+      - name: Guardar el registro de publicaciones
+        if: always()
+        run: |
+          if ! git diff --quiet -- .linkedin/posted.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add .linkedin/posted.json
+            git commit -m "LinkedIn: registrar publicaciones [skip ci]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

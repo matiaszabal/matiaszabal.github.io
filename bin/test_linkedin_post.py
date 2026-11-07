@@ -91,8 +91,9 @@ class Base(unittest.TestCase):
             "permalink: /posts/:year/:title/\n", encoding="utf-8")
         self.saved = dict(os.environ)
         os.environ.update({"SITE_DIR": str(self.site), "LINKEDIN_API_BASE": self.base,
-                           "LINKEDIN_PAUSE": "0", "LINKEDIN_API_VERSION": "202610"})
-        for k in ("LINKEDIN_ACCESS_TOKEN", "LINKEDIN_PERSON_ID", "LINKEDIN_TOKEN_EXPIRES_AT", "DRY_RUN",
+                           "LINKEDIN_PAUSE": "0", "LINKEDIN_API_VERSION": "202610",
+                           "LINKEDIN_MAX_PER_DAY": "10"})
+        for k in ("LINKEDIN_ACCESS_TOKEN", "LINKEDIN_PERSON_ID", "LINKEDIN_TOKEN_EXPIRES_AT", "DRY_RUN", "LINKEDIN_ENABLED",
                   "GITHUB_STEP_SUMMARY", "MAX_POSTS_PER_RUN"):
             os.environ.pop(k, None)
 
@@ -115,6 +116,7 @@ class Base(unittest.TestCase):
     def login(self):
         os.environ["LINKEDIN_ACCESS_TOKEN"] = "TOKEN"
         os.environ["LINKEDIN_PERSON_ID"] = "abc123"
+        os.environ["LINKEDIN_ENABLED"] = "true"
 
     def run_main(self, *args):
         m = self.mod()
@@ -156,13 +158,13 @@ class Unitarias(Base):
         self.add("custom", post_md("T", extra='linkedin_text: "Mirá esto (nuevo) #ia"\n'))
         m = self.mod()
         p = m.load_posts(m.read_config())[0]
-        self.assertEqual(m.build_commentary(p), "Mirá esto \\(nuevo\\) \\#ia")
+        self.assertEqual(m.build_commentary(p), "Mirá esto \\(nuevo\\) {hashtag|\\#|ia}")
 
     def test_comentario_por_defecto(self):
         self.add("nuevo", post_md("Mi post"))
         m = self.mod()
         c = m.build_commentary(m.load_posts(m.read_config())[0])
-        self.assertTrue(c.startswith("Nuevo en el blog: Mi post\n\nResumen \\(con paréntesis\\) y \\#hashtag"))
+        self.assertTrue(c.startswith("Nuevo en el blog: Mi post\n\nResumen \\(con paréntesis\\) y {hashtag|\\#|hashtag}"))
 
     def test_sin_descripcion_no_manda_campo_vacio(self):
         md = '---\nlayout: post\ntitle: "Sin resumen"\ndate: 2026-11-07 00:20:00 -0300\n---\n\ncuerpo\n'
@@ -173,6 +175,11 @@ class Unitarias(Base):
         self.assertNotIn("description", body["content"]["article"])
         self.assertNotIn("thumbnail", body["content"]["article"])
         self.assertEqual(m.build_commentary(p), "Nuevo en el blog: Sin resumen")
+
+    def test_hashtag_real_y_resto_escapado(self):
+        m = self.mod()
+        self.assertEqual(m.to_little("Hola #IA agéntica (v2) #1 y a#b"),
+                         "Hola {hashtag|\\#|IA} agéntica \\(v2\\) \\#1 y a\\#b")
 
     def test_vencimiento_del_token(self):
         m = self.mod()
@@ -238,6 +245,7 @@ class Flujo(Base):
 
     def test_sin_secretos_se_omite_sin_fallar(self):
         self.add("nuevo", post_md("Nuevo"))
+        os.environ["LINKEDIN_ENABLED"] = "true"  # habilitado, pero sin credenciales
         rc, out, _ = self.run_main()
         self.assertEqual((rc, Mock.log), (0, []))
         self.assertIn("LinkedIn no está configurado", out)
@@ -290,6 +298,54 @@ class Flujo(Base):
         rc, out, _ = self.run_main()
         self.assertEqual(rc, 5)  # publicó, pero falla a propósito para que GitHub avise
         self.assertEqual(self.ledger()["posts"]["nuevo"]["status"], "posted")
+
+    def test_pausado_sin_LINKEDIN_ENABLED(self):
+        self.add("nuevo", post_md("Nuevo"))
+        self.login()
+        os.environ.pop("LINKEDIN_ENABLED")
+        rc, out, _ = self.run_main()
+        self.assertEqual((rc, Mock.log), (0, []))
+        self.assertIn("PAUSADA", out)
+        self.assertIsNone(self.ledger())
+
+    def test_cola_un_post_por_dia_en_orden(self):
+        for s in ("uno", "dos", "tres"):
+            self.add(s, post_md(s))
+        self.run_main("--baseline")
+        self.assertEqual(self.run_main("--enqueue", "tres", "uno", "dos")[0], 0)
+        self.login()
+        os.environ["LINKEDIN_MAX_PER_DAY"] = "1"
+        self.run_main()
+        st = {k: v["status"] for k, v in self.ledger()["posts"].items()}
+        self.assertEqual(st, {"tres": "posted", "uno": "queued", "dos": "queued"})
+        Mock.log.clear()
+        rc, out, _ = self.run_main()  # mismo día: no publica más
+        self.assertEqual(Mock.log, [])
+        self.assertIn("máximo de hoy", out)
+        led = self.ledger()  # pasa un día: se corre hacia atrás la hora de la publicación
+        led["posts"]["tres"]["at"] = (datetime.now(timezone.utc) - timedelta(days=1)).isoformat(timespec="seconds")
+        (self.site / ".linkedin/posted.json").write_text(json.dumps(led))
+        self.run_main()
+        st = {k: v["status"] for k, v in self.ledger()["posts"].items()}
+        self.assertEqual(st, {"tres": "posted", "uno": "posted", "dos": "queued"})
+
+    def test_enqueue_valida(self):
+        self.add("uno", post_md("Uno"))
+        self.assertEqual(self.run_main("--enqueue", "no-existe")[0], 2)
+        self.login()
+        self.run_main("--enqueue", "uno")
+        self.run_main()
+        self.assertEqual(self.run_main("--enqueue", "uno")[0], 2)  # ya publicado
+
+    def test_plan_muestra_el_texto_exacto_sin_llamar(self):
+        self.add("uno", post_md("Uno", extra='linkedin_text: "Primera línea\\n\\nSegunda con #IAagéntica y (paréntesis)"\n'))
+        self.run_main("--enqueue", "uno")
+        rc, out, _ = self.run_main("--plan")
+        self.assertEqual(rc, 0)
+        self.assertIn("salida #1: uno", out)
+        self.assertIn("{hashtag|\\#|IAagéntica}", out)
+        self.assertIn("\\(paréntesis\\)", out)
+        self.assertEqual(Mock.log, [])
 
     def test_whoami(self):
         self.login()

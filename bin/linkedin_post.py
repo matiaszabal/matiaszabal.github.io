@@ -49,6 +49,7 @@ RESERVED = set("|{}@[]()<>#\\*_~")
 MAX_COMMENTARY = 3000
 MAX_PER_RUN_DEFAULT = 3
 PAUSE = float(os.environ.get("LINKEDIN_PAUSE") or 2)  # segundos entre posts
+MAX_PER_DAY = int(os.environ.get("LINKEDIN_MAX_PER_DAY") or 1)  # tope diario (día del sitio)
 
 
 class LinkedInError(Exception):
@@ -176,6 +177,20 @@ def escape_little(text: str) -> str:
     return "".join("\\" + c if c in RESERVED else c for c in text)
 
 
+HASHTAG = re.compile(r"(?<![\w#\\])#([^\W\d_][^\W_]*)")
+
+
+def to_little(text: str) -> str:
+    """Texto plano a formato de LinkedIn: escapa lo reservado y convierte #etiqueta en hashtag real."""
+    out, pos = [], 0
+    for m in HASHTAG.finditer(text):
+        out.append(escape_little(text[pos:m.start()]))
+        out.append("{hashtag|\\#|" + m.group(1) + "}")
+        pos = m.end()
+    out.append(escape_little(text[pos:]))
+    return "".join(out)
+
+
 def clip(text: str, limit: int) -> str:
     text = text.strip()
     return text if len(text) <= limit else text[: limit - 1].rstrip() + "…"
@@ -188,7 +203,7 @@ def build_commentary(post: dict) -> str:
         plain = f"Nuevo en el blog: {post['title']}"
         if post["description"]:
             plain += f"\n\n{post['description']}"
-    return escape_little(clip(plain, MAX_COMMENTARY // 2))
+    return to_little(clip(plain, MAX_COMMENTARY // 2))
 
 
 def build_post_body(post: dict, person_urn: str, thumbnail_urn: str | None) -> dict:
@@ -219,7 +234,9 @@ def _request(method: str, url: str, headers: dict, data: bytes | None):
         with urllib.request.urlopen(req, timeout=60) as r:
             return r.status, dict(r.headers), r.read()
     except urllib.error.HTTPError as e:
-        raise LinkedInError(e.code, e.read().decode("utf-8", "replace")) from None
+        body = e.read().decode("utf-8", "replace")
+        e.close()
+        raise LinkedInError(e.code, body) from None
     except urllib.error.URLError as e:
         raise LinkedInError(0, f"sin conexión: {e.reason}") from None
 
@@ -315,9 +332,11 @@ def cmd_baseline() -> int:
 
 
 def candidates(posts: list[dict], ledger: dict, now: datetime) -> list[dict]:
-    out = []
+    """Primero la cola explícita (status queued, por `order`), después los posts nuevos por fecha."""
+    queued, new = [], []
     for p in posts:
-        if p["slug"] in ledger["posts"]:
+        entry = ledger["posts"].get(p["slug"])
+        if entry and entry.get("status") != "queued":
             continue
         if p["optout"]:
             log(f"- {p['slug']}: omitido (linkedin: false)")
@@ -325,8 +344,56 @@ def candidates(posts: list[dict], ledger: dict, now: datetime) -> list[dict]:
         if p["when"] > now:
             log(f"- {p['slug']}: fecha futura, se publicará cuando salga")
             continue
-        out.append(p)
-    return out
+        (queued if entry else new).append(p)
+    queued.sort(key=lambda p: ledger["posts"][p["slug"]].get("order", 10**6))
+    return queued + new
+
+
+def posted_today(ledger: dict, tz: ZoneInfo, now: datetime) -> int:
+    today = now.astimezone(tz).date()
+    n = 0
+    for v in ledger["posts"].values():
+        if v.get("status") == "posted" and v.get("at"):
+            if datetime.fromisoformat(v["at"]).astimezone(tz).date() == today:
+                n += 1
+    return n
+
+
+def cmd_enqueue(slugs: list[str]) -> int:
+    """Pone posts en la cola, en ese orden. Pisa un `baseline`; no toca lo ya publicado."""
+    posts = {p["slug"]: p for p in load_posts(read_config())}
+    ledger = load_ledger()
+    for slug in slugs:
+        if slug not in posts:
+            log(f"No existe el post '{slug}' en _posts/")
+            return 2
+        if ledger["posts"].get(slug, {}).get("status") == "posted":
+            log(f"'{slug}' ya fue publicado en LinkedIn; no se vuelve a encolar")
+            return 2
+    for i, slug in enumerate(slugs, 1):
+        ledger["posts"][slug] = {"status": "queued", "order": i}
+    save_ledger(ledger)
+    log(f"cola: {len(slugs)} posts, uno por día, en este orden:")
+    for i, slug in enumerate(slugs, 1):
+        log(f"  {i}. {slug}")
+    return 0
+
+
+def cmd_plan() -> int:
+    """Muestra la cola y exactamente lo que se publicaría, sin llamar a LinkedIn."""
+    cfg = read_config()
+    tz = ZoneInfo(cfg["timezone"])
+    ledger = load_ledger()
+    todo = candidates(load_posts(cfg), ledger, datetime.now(timezone.utc))
+    done = posted_today(ledger, tz, datetime.now(timezone.utc))
+    log(f"tope diario: {MAX_PER_DAY} | ya publicados hoy: {done} | en cola o nuevos: {len(todo)}")
+    for i, p in enumerate(todo, 1):
+        commentary = build_commentary(p)
+        thumb = bool(p["thumbnail"]) and (ROOT / p["thumbnail"].lstrip("/")).exists()
+        log(f"\n--- salida #{i}: {p['slug']}\nlink: {p['url']}\nminiatura: {'sí' if thumb else 'NO'} | "
+            f"texto propio: {'sí' if p['custom_text'] else 'no (usa el texto por defecto)'} | {len(commentary)} caracteres\n"
+            f"texto tal como lo enviaría el script:\n{commentary}")
+    return 0
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -335,12 +402,18 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--baseline", action="store_true", help="marca los posts actuales como ya existentes")
     ap.add_argument("--whoami", action="store_true", help="muestra el id de miembro del token")
     ap.add_argument("--max", type=int, default=int(os.environ.get("MAX_POSTS_PER_RUN") or MAX_PER_RUN_DEFAULT))
+    ap.add_argument("--enqueue", nargs="+", metavar="SLUG", help="pone posts en la cola, en ese orden (uno por día)")
+    ap.add_argument("--plan", action="store_true", help="muestra la cola y el texto exacto de cada salida")
     args = ap.parse_args(argv)
     dry = args.dry_run or os.environ.get("DRY_RUN", "") not in ("", "0", "false")
     token = (os.environ.get("LINKEDIN_ACCESS_TOKEN") or "").strip()
 
     if args.baseline:
         return cmd_baseline()
+    if args.enqueue:
+        return cmd_enqueue(args.enqueue)
+    if args.plan:
+        return cmd_plan()
     if args.whoami:
         if not token:
             log("Falta LINKEDIN_ACCESS_TOKEN")
@@ -357,21 +430,31 @@ def main(argv: list[str] | None = None) -> int:
     ledger = load_ledger()
     todo = candidates(posts, ledger, datetime.now(timezone.utc))
     log(f"{len(posts)} posts en el sitio, {len(ledger['posts'])} en el registro, {len(todo)} para publicar")
+    now = datetime.now(timezone.utc)
+    left = max(0, MAX_PER_DAY - posted_today(ledger, ZoneInfo(cfg["timezone"]), now))
+    cap = min(args.max, left)
+    enabled = os.environ.get("LINKEDIN_ENABLED", "").strip().lower() in ("1", "true", "yes")
 
     rc = 0
     done: list[str] = []
     if todo and dry:
-        for p in todo[: args.max]:
+        if left == 0:
+            log("(ya se publicó el máximo de hoy: lo siguiente saldría mañana)")
+        for p in todo[:MAX_PER_DAY]:
             body = build_post_body(p, person_urn_from_env() or "urn:li:person:DRY_RUN", "urn:li:image:DRY_RUN" if p["thumbnail"] else None)
             log(f"\n[DRY RUN] {p['slug']}\n{json.dumps(body, ensure_ascii=False, indent=2)}")
         log("\n[DRY RUN] no se llamó a LinkedIn ni se tocó el registro")
+    elif todo and not enabled:
+        gh("notice", f"Publicación en LinkedIn PAUSADA (falta LINKEDIN_ENABLED=true): {len(todo)} post(s) en cola, no se publica nada")
+    elif todo and left == 0:
+        log(f"Ya se publicó el máximo de hoy ({MAX_PER_DAY}); quedan {len(todo)} en cola para los días siguientes")
     elif todo and (not token or not person_urn_from_env()):
         gh("notice", f"LinkedIn no está configurado (faltan secretos): {len(todo)} post(s) quedan pendientes")
     elif todo:
         person = person_urn_from_env()
-        if len(todo) > args.max:
-            gh("warning", f"{len(todo)} posts nuevos; se publican {args.max} y el resto en la próxima corrida")
-        for p in todo[: args.max]:
+        if len(todo) > cap:
+            log(f"{len(todo)} para publicar; hoy sale(n) {cap} (tope diario {MAX_PER_DAY}); el resto, los días siguientes")
+        for p in todo[:cap]:
             if not url_is_live(p["url"]):
                 gh("warning", f"{p['slug']}: la URL todavía no responde 200; se reintenta en la próxima corrida")
                 continue
