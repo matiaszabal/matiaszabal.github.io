@@ -7,6 +7,11 @@ on:
   schedule:
     - cron: "0 9 * * *"
   workflow_dispatch:
+    inputs:
+      linkedin_dry_run:
+        description: "LinkedIn: solo mostrar lo que publicaría, sin llamar a la API"
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -53,3 +58,34 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+
+  # Publica en LinkedIn los posts nuevos, ya con el sitio desplegado.
+  # Un fallo acá no afecta al sitio: el deploy ya terminó. Ver .linkedin/README.md
+  linkedin:
+    needs: deploy
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # para guardar .linkedin/posted.json
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Publicar posts nuevos en LinkedIn
+        env:
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_PERSON_ID: ${{ secrets.LINKEDIN_PERSON_ID }}
+          LINKEDIN_TOKEN_EXPIRES_AT: ${{ vars.LINKEDIN_TOKEN_EXPIRES_AT }}
+          LINKEDIN_API_VERSION: "202610"
+          DRY_RUN: ${{ inputs.linkedin_dry_run && '1' || '' }}
+        run: python3 bin/linkedin_post.py
+      - name: Guardar el registro de publicaciones
+        if: always()
+        run: |
+          if ! git diff --quiet -- .linkedin/posted.json; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add .linkedin/posted.json
+            git commit -m "LinkedIn: registrar publicaciones [skip ci]"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

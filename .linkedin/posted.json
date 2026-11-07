@@ -1,0 +1,53 @@
+{
+  "posts": {
+    "aceptaron-nuestro-paper-en-ieee-tps": {
+      "status": "baseline"
+    },
+    "ai-control": {
+      "status": "baseline"
+    },
+    "control-evaluation-in-ai-safety": {
+      "status": "baseline"
+    },
+    "controlling-emergent-value-systems": {
+      "status": "baseline"
+    },
+    "el-peligro-silencioso-de-cedar-en": {
+      "status": "baseline"
+    },
+    "evaluar-agentes-en-adk-lo-que-ya-viene-nativo": {
+      "status": "baseline"
+    },
+    "gpt4o-would-you-take-the-opposite": {
+      "status": "baseline"
+    },
+    "las-empresas-dicen-que-mitigan-riesgos-de-ia": {
+      "status": "baseline"
+    },
+    "los-servidores-mcp-no-fallan-por": {
+      "status": "baseline"
+    },
+    "memoria-en-adk-cuatro-capas": {
+      "status": "baseline"
+    },
+    "navigating-honesty-vs-helpfulness": {
+      "status": "baseline"
+    },
+    "new-critical-review-emergent-misalignment": {
+      "status": "baseline"
+    },
+    "recommendations-for-technical-ai": {
+      "status": "baseline"
+    },
+    "seguridad-y-gobernanza-en-arquitectura-de-ia-agentica": {
+      "status": "baseline"
+    },
+    "summary-of-shallow-review-of-technical": {
+      "status": "baseline"
+    },
+    "survey-note-analysis-of-the-indian": {
+      "status": "baseline"
+    }
+  },
+  "version": 1
+}
