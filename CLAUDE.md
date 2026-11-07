@@ -1,6 +1,6 @@
 # Blog de Matías: reglas para publicar
 
-Sitio Jekyll en GitHub Pages (`matiaszabal.github.io`). Audiencia: colegas de IA agéntica.
+Sitio Jekyll con el tema al-folio en GitHub Pages (`matiaszabal.github.io`). URLs de posts: `/blog/AAAA/titulo/`. Audiencia: colegas de IA agéntica.
 Cada push a `main` despliega solo con GitHub Actions.
 
 ## Flujo para un artículo nuevo
@@ -27,5 +27,8 @@ tags: [agentes, evaluación]
 
 - Idioma: español, con tildes correctas.
 - No incluir datos de clientes ni de empleadores actuales o anteriores, ni material confidencial.
+- Si un post contiene `{{` o `{%` (código, plantillas), envolver ese fragmento en `{% raw %}...{% endraw %}`.
+- Posts con `tags:` y `description:` en el front matter: la portada y el blog los muestran.
+- Vista previa local: `docker compose up` y abrir http://localhost:8080
 - No agregar plugins ni dependencias sin consultarlo: el sitio debe seguir simple.
 - Commits con el mail noreply de GitHub (ya configurado en este repo), nunca un mail laboral.

@@ -6,7 +6,6 @@ description: "In our race toward ever more capable AI systems, ensuring that the
 substack_url: "https://matiaszz.substack.com/p/controlling-emergent-value-systems"
 ---
 
-{% raw %}
 In our race toward ever more capable AI systems, ensuring that these machines behave as intended becomes increasingly critical. The paper “[Utility Engineering: Analyzing and Controlling Emergent Value Systems in AIs](https://arxiv.org/pdf/2502.08640)” dives deep into this challenge. Here are the most important conclusions:
 
 ---
@@ -59,4 +58,3 @@ For those interested in delving deeper into the topic, I highly recommend readin
 **[Utility Engineering: Analyzing and Controlling Emergent Value Systems in AIs](https://arxiv.org/pdf/2502.08640)**
 
 ---
-{% endraw %}

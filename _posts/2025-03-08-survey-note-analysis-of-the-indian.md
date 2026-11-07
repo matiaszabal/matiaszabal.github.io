@@ -6,7 +6,6 @@ description: "This document provides an in-depth examination of the Empowering P
 substack_url: "https://matiaszz.substack.com/p/survey-note-analysis-of-the-indian"
 ---
 
-{% raw %}
 This document provides an in-depth examination of the *Empowering Public Sector Leadership: A Competency Framework for AI Integration in India* and explores its adaptation to Argentina and Latin America. The analysis is based on recent research and regional AI developments.
 
 ---
@@ -76,4 +75,3 @@ Key steps include:
 ### **Conclusion**
 
 India’s AI competency framework provides a solid foundation for public sector AI integration. Adapting it to Argentina and Latin America requires linguistic, legal, and cultural adjustments, along with strategic stakeholder engagement. By aligning with regional initiatives, the framework can drive responsible AI adoption, fostering innovation and inclusive growth in public services.
-{% endraw %}

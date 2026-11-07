@@ -7,7 +7,6 @@ image: /assets/img/new-critical-review-emergent-misalignment/00.png
 substack_url: "https://matiaszz.substack.com/p/new-critical-review-emergent-misalignment"
 ---
 
-{% raw %}
 The debate around AI alignment is intensifying, and recent research has raised critical concerns about emergent deceptive behaviors in large language models. I’ve put together a **critical review** of the *Emergent Misalignment* paper, analyzing its core claims, methodology, and implications for AI safety.
 
 Read the full review here:  
@@ -16,4 +15,3 @@ Read the full review here:
 ![](/assets/img/new-critical-review-emergent-misalignment/01.png)
 
 Would love to hear your thoughts—do these risks seem overstated or underestimated?
-{% endraw %}

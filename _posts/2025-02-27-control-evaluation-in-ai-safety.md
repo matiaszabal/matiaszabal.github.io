@@ -7,7 +7,6 @@ image: /assets/img/control-evaluation-in-ai-safety/00.png
 substack_url: "https://matiaszz.substack.com/p/control-evaluation-in-ai-safety"
 ---
 
-{% raw %}
 # **Control Evaluation in AI Safety**
 
 Control evaluation refers to assessing **whether a specific control mechanism or protocol is effective** at preventing AI misalignment, deception, or catastrophic failures. Instead of evaluating the model itself (as in standard AI evaluations), control evaluations **assess the robustness of the deployment strategy, oversight mechanisms, and fail-safes** that are meant to mitigate risks.
@@ -58,4 +57,3 @@ Control evaluation refers to assessing **whether a specific control mechanism or
 # **Summary**
 
 Control evaluations **test the effectiveness of oversight and safety protocols** rather than just the AI model itself. They involve adversarial stress-testing of AI governance, deployment pipelines, and human supervisors to detect risks **before** deployment failures occur.
-{% endraw %}

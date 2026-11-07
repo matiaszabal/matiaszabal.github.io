@@ -7,7 +7,6 @@ image: /assets/img/gpt4o-would-you-take-the-opposite/00.png
 substack_url: "https://matiaszz.substack.com/p/gpt4o-would-you-take-the-opposite"
 ---
 
-{% raw %}
 ##### me:
 
 ##### "who would bet real money that gpt 4.5 is never going to show deceptive behavior in any flavour."
@@ -63,4 +62,3 @@ If someone is willing to bet that GPT-4.5 will never be deceptive in any form, e
 **Would you take the opposite bet?**"
 
 ---
-{% endraw %}

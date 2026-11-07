@@ -7,7 +7,6 @@ image: /assets/img/recommendations-for-technical-ai/00.png
 substack_url: "https://matiaszz.substack.com/p/recommendations-for-technical-ai"
 ---
 
-{% raw %}
 ​Anthropic's Alignment Science team has identified several critical research directions to enhance AI safety. Among these, the following areas are poised to have significant impact:​alignment
 
 1. **Evaluating Capabilities**: Developing robust methods to assess AI systems' abilities is crucial. Current benchmarks often fail to provide continuous, extrapolatable signals of AI progress, leading to discrepancies between benchmark performance and real-world impact. High-quality evaluations that track real-world implications are essential for understanding and guiding AI development. ​[alignment.anthropic.com](https://alignment.anthropic.com/2025/recommended-directions/)
@@ -17,4 +16,3 @@ substack_url: "https://matiaszz.substack.com/p/recommendations-for-technical-ai"
 5. **Adversarial Robustness**: Enhancing AI systems' resilience against adversarial attacks is critical. Creating realistic benchmarks for jailbreaks and developing adaptive defenses can help ensure that AI systems remain secure and reliable in the face of evolving threats. ​[alignment.anthropic.com](https://alignment.anthropic.com/2025/recommended-directions/)
 
 Focusing research efforts on these areas can significantly contribute to the development of safe and beneficial AI systems.
-{% endraw %}

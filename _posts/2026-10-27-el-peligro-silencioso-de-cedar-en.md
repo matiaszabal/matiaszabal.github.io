@@ -6,7 +6,6 @@ description: "Cómo la combinación de políticas schemaless, el operador in y l
 substack_url: "https://matiaszz.substack.com/p/el-peligro-silencioso-de-cedar-en"
 ---
 
-{% raw %}
 En la era de la **IA Agéntica**, donde los modelos de lenguaje (LLMs) tienen capacidad de ejecutar comandos en terminales, interactuar con APIs externas, clonar repositorios y alterar bases de datos, la capa de *Policy-as-Code* (autorización basada en políticas) se ha convertido en la última línea de defensa.
 
 Entre los motores más adoptados destaca **Cedar** (el lenguaje declarativo de autorización de código abierto de AWS). Sin embargo, en nuestra última investigación descubrimos cómo dos propiedades de diseño perfectamente válidas según la especificación formal de Cedar pueden combinarse para producir **fallos silenciosos de tipo** ***Fail-Open*** (bypass completo de autorización) completamente invisibles para los auditores.
@@ -123,4 +122,3 @@ Esta indistinción provoca que los analizadores formales basados en solucionador
 2. **Usa métodos de conjuntos explícitos:** Para comprobar strings en listas, usa `set.contains(item)` en lugar de `item in set`.
 3. **Audita las respuestas completas del evaluador:** No leas únicamente el booleano `response.allowed`; inspecciona siempre el array de errores y advertencias de evaluación devuelto por el runtime.
 4. **Separa la procedencia de los datos del contexto:** No mezcles datos controlados por el modelo (como argumentos generados por el LLM) con variables verificadas por el host de ejecución sin marcas explícitas de atestación.
-{% endraw %}

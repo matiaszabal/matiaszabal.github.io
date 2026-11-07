@@ -7,7 +7,6 @@ image: /assets/img/los-servidores-mcp-no-fallan-por/00.png
 substack_url: "https://matiaszz.substack.com/p/los-servidores-mcp-no-fallan-por"
 ---
 
-{% raw %}
 **Matías Zabaljáuregui**
 
 📄 **Paper completo (PDF):**
@@ -54,4 +53,3 @@ Diez repositorios afectados están en proceso de *coordinated disclosure*. **En 
 ## Cómo se posiciona frente a otros trabajos
 
 Contra cuatro trabajos concurrentes de 2025–2026: un SoK existente de seguridad MCP, un estudio de registros a escala (67.057 servidores), un estudio empírico de 1.899 repositorios y una taxonomía de defensas alineada por capas. El aporte diferencial es la auditoría manual y la atención a las decisiones de autorización, no a los patrones de bug.
-{% endraw %}

@@ -7,7 +7,6 @@ image: /assets/img/summary-of-shallow-review-of-technical/00.png
 substack_url: "https://matiaszz.substack.com/p/summary-of-shallow-review-of-technical"
 ---
 
-{% raw %}
 This *Shallow Review* provides an overview of ongoing research agendas in technical AI safety as of 2024, categorizing efforts into key domains. The review highlights the breadth of activity without implying equivalent progress across all areas. It serves as a reference for researchers, policymakers, and funders.
 
 # **Key Research Areas:**
@@ -57,4 +56,3 @@ This *Shallow Review* provides an overview of ongoing research agendas in techni
 - **Emerging Risks:** AI deception, steganography, and unaligned agency remain significant challenges.
 
 This review provides a high-level map of AI safety research, emphasizing areas that require further exploration and funding.
-{% endraw %}

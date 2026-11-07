@@ -7,7 +7,6 @@ image: /assets/img/aceptaron-nuestro-paper-en-ieee-tps/00.png
 substack_url: "https://matiaszz.substack.com/p/aceptaron-nuestro-paper-en-ieee-tps"
 ---
 
-{% raw %}
 Tengo una buena noticia: el paper fue aceptado para presentación y publicación en el **Application Track de IEEE TPS 2026** (International Conference on Trust, Privacy and Security in Intelligent Systems and Applications). Según el comité, se aceptaron 16 papers en ese track sobre 146 envíos totales.
 
 Acá te cuento de qué se trata, con los números que reporta el paper y con sus límites.
@@ -105,4 +104,3 @@ El código, los logs por episodio y los scripts de análisis serán publicados e
 ## Qué sigue
 
 Antes de la versión final voy a trabajar en tres frentes: validación humana de una muestra de episodios, un baseline aleatorio para el atacante y un comité que use abstención con las confianzas reales. Cuando esté publicada la versión definitiva, la comparto acá.
-{% endraw %}
