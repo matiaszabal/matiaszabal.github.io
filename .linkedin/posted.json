@@ -12,6 +12,9 @@
     "aprender-sin-tocar-pesos-few-shot-dinamico-expel-y-reflexion": {
       "status": "baseline"
     },
+    "ataques-adversariales-de-evasion-fgsm-pgd-gcg-y-el-espacio-de-tokens": {
+      "status": "baseline"
+    },
     "control-evaluation-in-ai-safety": {
       "status": "baseline"
     },
@@ -19,6 +22,9 @@
       "status": "baseline"
     },
     "crear-un-agente-a-partir-de-un-arquetipo-sin-escribir-el-codigo": {
+      "status": "baseline"
+    },
+    "drift-silencioso-en-agentes-llm-psi-kl-y-ks": {
       "status": "baseline"
     },
     "el-peligro-silencioso-de-cedar-en": {
@@ -58,6 +64,9 @@
       "status": "baseline"
     },
     "recommendations-for-technical-ai": {
+      "status": "baseline"
+    },
+    "reward-hacking-por-que-el-optimizador-explota-el-proxy": {
       "status": "baseline"
     },
     "seguridad-y-gobernanza-en-arquitectura-de-ia-agentica": {
