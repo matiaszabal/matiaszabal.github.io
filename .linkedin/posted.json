@@ -12,6 +12,9 @@
     "ai-control": {
       "status": "baseline"
     },
+    "anatomia-de-un-agente-con-cuatro-tipos-de-tool-y-dos-integraciones-mcp": {
+      "status": "baseline"
+    },
     "aprender-sin-tocar-pesos-few-shot-dinamico-expel-y-reflexion": {
       "status": "baseline"
     },
@@ -50,6 +53,9 @@
     "los-servidores-mcp-no-fallan-por": {
       "status": "baseline"
     },
+    "mcptoolset-en-adk-el-cliente-mcp-generico-y-como-acotarlo": {
+      "status": "baseline"
+    },
     "memoria-en-adk-cuatro-capas": {
       "order": 3,
       "status": "queued"
@@ -83,6 +89,9 @@
       "status": "baseline"
     },
     "survey-note-analysis-of-the-indian": {
+      "status": "baseline"
+    },
+    "tres-formas-de-armar-el-lado-servidor-de-mcp-fastmcp-toolbox-y-terceros": {
       "status": "baseline"
     }
   },
