@@ -21,6 +21,12 @@
     "ataques-adversariales-de-evasion-fgsm-pgd-gcg-y-el-espacio-de-tokens": {
       "status": "baseline"
     },
+    "como-probar-un-servidor-mcp-sin-un-llm-en-el-medio": {
+      "status": "baseline"
+    },
+    "con-que-frecuencia-aparece-el-fail-open-de-cedar-en-repositorios-reales": {
+      "status": "baseline"
+    },
     "control-evaluation-in-ai-safety": {
       "status": "baseline"
     },
@@ -28,6 +34,12 @@
       "status": "baseline"
     },
     "crear-un-agente-a-partir-de-un-arquetipo-sin-escribir-el-codigo": {
+      "status": "baseline"
+    },
+    "cuando-la-capa-de-enforcement-falla-abierta-dos-bugs-y-cero-enforcement": {
+      "status": "baseline"
+    },
+    "dos-metodos-una-misma-estructura-de-riesgo-en-servidores-mcp": {
       "status": "baseline"
     },
     "drift-silencioso-en-agentes-llm-psi-kl-y-ks": {
@@ -40,7 +52,13 @@
       "order": 4,
       "status": "queued"
     },
+    "functiontool-agenttool-y-mcp-tres-formas-de-darle-herramientas-a-un-agente": {
+      "status": "baseline"
+    },
     "gpt4o-would-you-take-the-opposite": {
+      "status": "baseline"
+    },
+    "la-brecha-de-atestacion-lo-que-un-lenguaje-de-politicas-no-puede-cerrar": {
       "status": "baseline"
     },
     "las-empresas-dicen-que-mitigan-riesgos-de-ia": {
@@ -73,6 +91,9 @@
       "status": "baseline"
     },
     "por-que-un-curso-de-agentes-empieza-por-criterio-y-no-por-codigo": {
+      "status": "baseline"
+    },
+    "que-encontre-al-escanear-siete-servidores-mcp-publicos": {
       "status": "baseline"
     },
     "recommendations-for-technical-ai": {
