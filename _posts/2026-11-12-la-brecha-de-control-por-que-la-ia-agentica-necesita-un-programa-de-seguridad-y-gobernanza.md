@@ -40,7 +40,7 @@ La expectativa de los propios líderes de seguridad es todavía más elocuente. 
 
 Merritt Baer, CSO de Enkrypt AI y ex Deputy CISO de AWS, lo resume así: lo que muchas empresas aprobaron es "una interfaz, no el sistema subyacente". Se firmó el chatbot; nadie revisó lo que el agente detrás puede alcanzar.
 
-El problema también es de conocimiento en la cúpula. Cuando EY pidió a ejecutivos C-level asociar los controles correctos a cinco riesgos de IA, solo el 12% respondió bien todo. Y la transparencia es baja: un estudio de MIT FutureTech y la Universidad de Queensland estima que el 62% de las 1.000 mayores empresas cotizantes no reconoce públicamente ningún riesgo de IA, incluido el 32% de las 100 más grandes.
+El problema también es de conocimiento en la cúpula. Cuando EY pidió a ejecutivos C-level asociar los controles correctos a cinco riesgos de IA, solo el 12% respondió bien todo. Y la transparencia es baja: un estudio de MIT FutureTech y la Universidad de Queensland estima que el 62% de las 1.000 mayores empresas cotizantes no reconoce públicamente ningún riesgo de IA, incluido el 32% de las 100 más grandes. Escribí sobre qué mide ese estudio y qué le toca al arquitecto cuando el reporte público no alcanza en [Las grandes empresas dicen que mitigan riesgos de IA. Casi ninguna dice cuáles](/posts/2026/las-empresas-dicen-que-mitigan-riesgos-de-ia/).
 
 ## Por qué los agentes cambian la ecuación de riesgo
 
@@ -97,6 +97,8 @@ Las obligaciones de supervisión humana del Artículo 14 de la Ley de IA de la U
 Al mismo tiempo, el mercado está abierto. Entre el 57% y el 68% de las empresas planea cambiar o sumar proveedores en las capas de control dentro de un año, y ninguna capa tiene un líder consolidado. Además, los controles nativos de cada proveedor solo aplican dentro de su propio entorno. Quien defina ahora su arquitectura de gobernanza, independiente del proveedor, decide en lugar de heredar decisiones.
 
 ## Qué pedirle al equipo: un plan de 90 días
+
+Estos controles no se agregan como una capa perimetral al final. Por qué la seguridad y la gobernanza tienen que estar en el diseño de la arquitectura lo desarrollé en [Seguridad y gobernanza en arquitectura de IA agéntica](/posts/2026/seguridad-y-gobernanza-en-arquitectura-de-ia-agentica/). El plan, por etapas:
 
 **Días 1 a 30: inventario y línea de base.**
 - Un responsable con nombre y apellido para cada agente.
