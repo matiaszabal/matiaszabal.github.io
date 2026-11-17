@@ -5,7 +5,8 @@ permalink: /
 subtitle: IA agéntica · seguridad de agentes · docencia
 
 profile:
-  align: right
+  align: left
+  image: prof_pic.jpg
   image_circular: false
   more_info: >
     <p>Coordinador Académico, UTDT</p>

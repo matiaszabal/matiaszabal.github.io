@@ -123,9 +123,9 @@ pagination:
     <li>
 
 {% if post.thumbnail %}
-
-<div class="row">
-          <div class="col-sm-9">
+<div class="post-row">
+<a class="post-row-thumb" href="{{ post.url | relative_url }}" tabindex="-1" aria-hidden="true"><img class="card-img" src="{{ post.thumbnail | relative_url }}" alt=""></a>
+<div class="post-row-body">
 {% endif %}
         <h3>
         {% if post.redirect == blank %}
@@ -175,12 +175,7 @@ pagination:
     </p>
 
 {% if post.thumbnail %}
-
 </div>
-
-  <div class="col-sm-3">
-    <img class="card-img" src="{{ post.thumbnail | relative_url }}" style="object-fit: cover; aspect-ratio: 4 / 3; width: 100%; height: auto" alt="image">
-  </div>
 </div>
 {% endif %}
     </li>

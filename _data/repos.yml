@@ -1,0 +1,488 @@
+# Generado por bin/update_repos.py: no editar a mano.
+repos:
+  - name: CURSO_AGENTES_UTDT_PUBLICO
+    url: https://github.com/matiaszabal/CURSO_AGENTES_UTDT_PUBLICO
+    description: "Arquitectura de Agentes IA — UTDT: recursos públicos del curso"
+    language: "Python"
+    stars: 8
+    fork: false
+  - name: mas-design-adk2-skill
+    url: https://github.com/matiaszabal/mas-design-adk2-skill
+    description: "Skill para diseñar agentes con ADK 2: los seis arquetipos (Reflex, ReAct, Planner-Executor, Query Decomposition, Reflection, Deep Research) con ejemplos verificados."
+    language: "Python"
+    stars: 1
+    fork: false
+  - name: cedar-schemaless-hazards-artifacts
+    url: https://github.com/matiaszabal/cedar-schemaless-hazards-artifacts
+    description: "Artifact bundle: authorization-policy silent-discard hazard study (double-blind workshop submission)"
+    language: "Python"
+    stars: 1
+    fork: false
+  - name: gatekeeper-failopen-hazards-artifacts
+    url: https://github.com/matiaszabal/gatekeeper-failopen-hazards-artifacts
+    description: "Artifact bundle: OPA/Gatekeeper negation-semantics fail-open hazard (AISec 2026 submission)"
+    language: "Python"
+    stars: 1
+    fork: false
+  - name: LHI
+    url: https://github.com/matiaszabal/LHI
+    description: ""
+    language: ""
+    stars: 1
+    fork: false
+  - name: argand
+    url: https://github.com/matiaszabal/argand
+    description: ""
+    language: "Jupyter Notebook"
+    stars: 1
+    fork: false
+  - name: dsdh
+    url: https://github.com/matiaszabal/dsdh
+    description: "Programa de Data Science"
+    language: "Jupyter Notebook"
+    stars: 1
+    fork: false
+  - name: dsdh2017a
+    url: https://github.com/matiaszabal/dsdh2017a
+    description: "Curso de Data Science en Digital House. 2017. Primer semestre. Turno Noche"
+    language: ""
+    stars: 1
+    fork: false
+  - name: OPENSEMBLE
+    url: https://github.com/matiaszabal/OPENSEMBLE
+    description: "Open Source Algorithmic Music Ensemble"
+    language: ""
+    stars: 1
+    fork: false
+  - name: matiaszabal.github.io
+    url: https://github.com/matiaszabal/matiaszabal.github.io
+    description: ""
+    language: "Python"
+    stars: 0
+    fork: false
+  - name: SEMINARIO_SEGURIDAD_AGENTES_ALUMNOS
+    url: https://github.com/matiaszabal/SEMINARIO_SEGURIDAD_AGENTES_ALUMNOS
+    description: "Material para alumnos del Seminario Seguridad en Agentes de IA - UNLP 2026"
+    language: "Python"
+    stars: 0
+    fork: false
+  - name: utdt-slides
+    url: https://github.com/matiaszabal/utdt-slides
+    description: "Arquitectura de Agentes IA — UTDT 2026 · Material de clases"
+    language: "TypeScript"
+    stars: 0
+    fork: false
+  - name: seminario-seguridad-agentes-2026
+    url: https://github.com/matiaszabal/seminario-seguridad-agentes-2026
+    description: "Wiki del Seminario de Postgrado: Seguridad en Agentes de IA — UNLP 2026"
+    language: "TypeScript"
+    stars: 0
+    fork: false
+  - name: samsara-apart-hackathon
+    url: https://github.com/matiaszabal/samsara-apart-hackathon
+    description: "RLMS-Shield: Engineering Rationality into AI Safety via Incentive Markets"
+    language: "Python"
+    stars: 0
+    fork: false
+  - name: blog
+    url: https://github.com/matiaszabal/blog
+    description: ""
+    language: "CSS"
+    stars: 0
+    fork: false
+  - name: reskilling-adaptativo-poc
+    url: https://github.com/matiaszabal/reskilling-adaptativo-poc
+    description: "Adaptive Learning Platform POC for Agentic AI Security Reskilling"
+    language: "TypeScript"
+    stars: 0
+    fork: false
+  - name: LLM-Prompt-Injection-Lab
+    url: https://github.com/matiaszabal/LLM-Prompt-Injection-Lab
+    description: "Challenges "
+    language: "TypeScript"
+    stars: 0
+    fork: false
+  - name: deltoAgente
+    url: https://github.com/matiaszabal/deltoAgente
+    description: "arch y simul"
+    language: "TypeScript"
+    stars: 0
+    fork: false
+  - name: Plataforma_reskilling_adaptativo_STARTHERE
+    url: https://github.com/matiaszabal/Plataforma_reskilling_adaptativo_STARTHERE
+    description: "Plataforma_reskilling_adaptativo"
+    language: "TypeScript"
+    stars: 0
+    fork: false
+  - name: ReskillingAdaptativo
+    url: https://github.com/matiaszabal/ReskillingAdaptativo
+    description: ""
+    language: ""
+    stars: 0
+    fork: false
+  - name: advance-ai-defense
+    url: https://github.com/matiaszabal/advance-ai-defense
+    description: ""
+    language: "TypeScript"
+    stars: 0
+    fork: false
+  - name: sec_site
+    url: https://github.com/matiaszabal/sec_site
+    description: ""
+    language: "JavaScript"
+    stars: 0
+    fork: false
+  - name: advanceagenticsecurityandredteaming
+    url: https://github.com/matiaszabal/advanceagenticsecurityandredteaming
+    description: ""
+    language: "JavaScript"
+    stars: 0
+    fork: false
+  - name: AI_Security_Essentials
+    url: https://github.com/matiaszabal/AI_Security_Essentials
+    description: ""
+    language: ""
+    stars: 0
+    fork: false
+  - name: AI_Manipulation_Apart_Hackathon
+    url: https://github.com/matiaszabal/AI_Manipulation_Apart_Hackathon
+    description: ""
+    language: "Jupyter Notebook"
+    stars: 0
+    fork: false
+  - name: AI_Governance_Profesional
+    url: https://github.com/matiaszabal/AI_Governance_Profesional
+    description: ""
+    language: ""
+    stars: 0
+    fork: false
+  - name: AI_Agentic_Security_Practitioner
+    url: https://github.com/matiaszabal/AI_Agentic_Security_Practitioner
+    description: ""
+    language: ""
+    stars: 0
+    fork: false
+  - name: AI_Security_Red_Teaming
+    url: https://github.com/matiaszabal/AI_Security_Red_Teaming
+    description: ""
+    language: ""
+    stars: 0
+    fork: false
+  - name: curso_CAISP
+    url: https://github.com/matiaszabal/curso_CAISP
+    description: ""
+    language: "Python"
+    stars: 0
+    fork: false
+  - name: CAISP_PREP_COURSE_BOSKE
+    url: https://github.com/matiaszabal/CAISP_PREP_COURSE_BOSKE
+    description: ""
+    language: ""
+    stars: 0
+    fork: false
+  - name: AI_Security_Course_Boske
+    url: https://github.com/matiaszabal/AI_Security_Course_Boske
+    description: ""
+    language: ""
+    stars: 0
+    fork: false
+  - name: samsara-
+    url: https://github.com/matiaszabal/samsara-
+    description: "Agentic AI Security Platform"
+    language: "Jupyter Notebook"
+    stars: 0
+    fork: false
+  - name: gen-AI-and-LLMs-Security-course
+    url: https://github.com/matiaszabal/gen-AI-and-LLMs-Security-course
+    description: ""
+    language: ""
+    stars: 0
+    fork: false
+  - name: quantization_vs_security
+    url: https://github.com/matiaszabal/quantization_vs_security
+    description: "experiment"
+    language: ""
+    stars: 0
+    fork: false
+  - name: Incentive-Compatible-Truthfulness
+    url: https://github.com/matiaszabal/Incentive-Compatible-Truthfulness
+    description: ""
+    language: ""
+    stars: 0
+    fork: false
+  - name: argand.github.io
+    url: https://github.com/matiaszabal/argand.github.io
+    description: "Latam AI Safety DAO"
+    language: "HTML"
+    stars: 0
+    fork: false
+  - name: Latam-AI-Safety-Hub
+    url: https://github.com/matiaszabal/Latam-AI-Safety-Hub
+    description: ""
+    language: ""
+    stars: 0
+    fork: false
+  - name: Venten
+    url: https://github.com/matiaszabal/Venten
+    description: "AI Safety Technical Research for Latam"
+    language: ""
+    stars: 0
+    fork: false
+  - name: matiaszabal
+    url: https://github.com/matiaszabal/matiaszabal
+    description: "Daily notes, ideas, insights and unfinished projects"
+    language: "HTML"
+    stars: 0
+    fork: false
+  - name: libropolkadot
+    url: https://github.com/matiaszabal/libropolkadot
+    description: "El libro abierto de Polkadot en español"
+    language: ""
+    stars: 0
+    fork: false
+  - name: polkadot
+    url: https://github.com/matiaszabal/polkadot
+    description: "Artículos y Experimentos"
+    language: ""
+    stars: 0
+    fork: false
+  - name: FiatDexArg
+    url: https://github.com/matiaszabal/FiatDexArg
+    description: ""
+    language: "JavaScript"
+    stars: 0
+    fork: false
+  - name: AI-Security-Wiki
+    url: https://github.com/matiaszabal/AI-Security-Wiki
+    description: "Over the past year, I’ve built an AI Security Library—now live on GitHub! It’s a vendor-neutral, risk-driven, and practitioner-focused wiki covering AI governance, risk, architecture, standards, agents, and compliance. Built for the community to learn, contribute, and grow. Would love your feedback and contributions!"
+    language: ""
+    stars: 0
+    fork: true
+  - name: AI-Security-Architect-Bootcamp
+    url: https://github.com/matiaszabal/AI-Security-Architect-Bootcamp
+    description: "Published site for the AI Security Architect Bootcamp (built output only)"
+    language: ""
+    stars: 0
+    fork: true
+  - name: mcp-course
+    url: https://github.com/matiaszabal/mcp-course
+    description: ""
+    language: ""
+    stars: 0
+    fork: true
+  - name: MCP-Taxonomy
+    url: https://github.com/matiaszabal/MCP-Taxonomy
+    description: "OWASP MCP Taxonomy"
+    language: ""
+    stars: 0
+    fork: true
+  - name: intro_orquestacion_adk2
+    url: https://github.com/matiaszabal/intro_orquestacion_adk2
+    description: ""
+    language: ""
+    stars: 0
+    fork: true
+  - name: context-engineering-intro
+    url: https://github.com/matiaszabal/context-engineering-intro
+    description: "Context engineering is the new vibe coding - it's the way to actually make AI coding assistants work. Claude Code is the best for this so that's what this repo is centered around, but you can apply this strategy with any AI coding assistant!"
+    language: ""
+    stars: 0
+    fork: true
+  - name: AI-agents-for-cybersecurity
+    url: https://github.com/matiaszabal/AI-agents-for-cybersecurity
+    description: "This repository contains resources and materials for the \"AI Agents and Retrieval Augmented Generation (RAG) for Cybersecurity Operations\" and other courses by Omar Santos."
+    language: ""
+    stars: 0
+    fork: true
+  - name: aidefense-framework
+    url: https://github.com/matiaszabal/aidefense-framework
+    description: "An open-source knowledge base of defensive countermeasures to protect AI/ML systems. Features interactive views and maps defenses to known threats from frameworks like MITRE ATLAS, MAESTRO, and OWASP."
+    language: ""
+    stars: 0
+    fork: true
+  - name: GenAI_Agents
+    url: https://github.com/matiaszabal/GenAI_Agents
+    description: "This repository provides tutorials and implementations for various Generative AI Agent techniques, from basic to advanced. It serves as a comprehensive guide for building intelligent, interactive AI systems."
+    language: ""
+    stars: 0
+    fork: true
+  - name: open-r1
+    url: https://github.com/matiaszabal/open-r1
+    description: "Fully open reproduction of DeepSeek-R1"
+    language: ""
+    stars: 0
+    fork: true
+  - name: awesome-safety-critical-ai
+    url: https://github.com/matiaszabal/awesome-safety-critical-ai
+    description: "A curated list of references on the role of AI in safety-critical systems ⚠️"
+    language: ""
+    stars: 0
+    fork: true
+  - name: AI-Safety-Atlas-
+    url: https://github.com/matiaszabal/AI-Safety-Atlas-
+    description: "AI Safety Atlas"
+    language: ""
+    stars: 0
+    fork: true
+  - name: ml-roadmap
+    url: https://github.com/matiaszabal/ml-roadmap
+    description: "Learn ML fundamentals for free."
+    language: ""
+    stars: 0
+    fork: true
+  - name: LLM-workshop-2024
+    url: https://github.com/matiaszabal/LLM-workshop-2024
+    description: "A 4-hour coding workshop to understand how LLMs are implemented and used"
+    language: ""
+    stars: 0
+    fork: true
+  - name: clarity-template
+    url: https://github.com/matiaszabal/clarity-template
+    description: "Clarity: A Minimalist Website Template for AI Research"
+    language: ""
+    stars: 0
+    fork: true
+  - name: circuit-breakers
+    url: https://github.com/matiaszabal/circuit-breakers
+    description: "Improving Alignment and Robustness with Circuit Breakers"
+    language: "Jupyter Notebook"
+    stars: 0
+    fork: true
+  - name: apartresearch-hackathon-nov2024
+    url: https://github.com/matiaszabal/apartresearch-hackathon-nov2024
+    description: ""
+    language: ""
+    stars: 1
+    fork: true
+  - name: ggwave-test
+    url: https://github.com/matiaszabal/ggwave-test
+    description: "Tiny data-over-sound library"
+    language: ""
+    stars: 0
+    fork: true
+  - name: LLMs-from-scratch
+    url: https://github.com/matiaszabal/LLMs-from-scratch
+    description: "Implement a ChatGPT-like LLM in PyTorch from scratch, step by step"
+    language: ""
+    stars: 0
+    fork: true
+  - name: End-to-End-Time-Series
+    url: https://github.com/matiaszabal/End-to-End-Time-Series
+    description: "This repository hosts code for my Time Series videos part of playlist here - https://www.youtube.com/playlist?list=PL3N9eeOlCrP5cK0QRQxeJd6GrQvhAtpBK"
+    language: "Jupyter Notebook"
+    stars: 0
+    fork: true
+  - name: MedLLMsPracticalGuide
+    url: https://github.com/matiaszabal/MedLLMsPracticalGuide
+    description: "A curated list of practical guide resources of Medical LLMs (Medical LLMs Tree, Tables, and Papers)"
+    language: ""
+    stars: 0
+    fork: true
+  - name: Mechanistic-Interpretability
+    url: https://github.com/matiaszabal/Mechanistic-Interpretability
+    description: "Mechanistic Interpretability in Transformers: This repository explores advanced techniques like Induction Head Detection and QK Circuit Analysis to uncover the inner workings of transformer-based models."
+    language: "Jupyter Notebook"
+    stars: 1
+    fork: true
+  - name: TransformerLens
+    url: https://github.com/matiaszabal/TransformerLens
+    description: "A library for mechanistic interpretability of GPT-style language models"
+    language: ""
+    stars: 1
+    fork: true
+  - name: nyaya-gpt
+    url: https://github.com/matiaszabal/nyaya-gpt
+    description: "AI agent with RAG+ReAct  on Indian Constitution & BNS"
+    language: ""
+    stars: 0
+    fork: true
+  - name: Large-Language-Model-Notebooks-Course
+    url: https://github.com/matiaszabal/Large-Language-Model-Notebooks-Course
+    description: "Practical course about Large Language Models. "
+    language: ""
+    stars: 0
+    fork: true
+  - name: fairseq
+    url: https://github.com/matiaszabal/fairseq
+    description: "Facebook AI Research Sequence-to-Sequence Toolkit written in Python."
+    language: ""
+    stars: 0
+    fork: true
+  - name: awesome-generative-ai-guide
+    url: https://github.com/matiaszabal/awesome-generative-ai-guide
+    description: "A one stop repository for generative AI research updates, interview resources, notebooks and much more!"
+    language: ""
+    stars: 0
+    fork: true
+  - name: Ollama-Colab-Integration
+    url: https://github.com/matiaszabal/Ollama-Colab-Integration
+    description: "Jupyter Notebooks for Ollama integration"
+    language: ""
+    stars: 0
+    fork: true
+  - name: ecco
+    url: https://github.com/matiaszabal/ecco
+    description: "Explain, analyze, and visualize NLP language models. Ecco creates interactive visualizations directly in Jupyter notebooks explaining the behavior of Transformer-based language models (like GPT2, BERT, RoBERTA, T5, and T0)."
+    language: ""
+    stars: 0
+    fork: true
+  - name: llama3-jailbreak
+    url: https://github.com/matiaszabal/llama3-jailbreak
+    description: "A trivial programmatic Llama 3 jailbreak. Sorry Zuck!"
+    language: ""
+    stars: 0
+    fork: true
+  - name: control-evaluations
+    url: https://github.com/matiaszabal/control-evaluations
+    description: ""
+    language: ""
+    stars: 0
+    fork: true
+  - name: awful-ai
+    url: https://github.com/matiaszabal/awful-ai
+    description: "😈Awful AI is a curated list to track current scary usages of AI - hoping to raise awareness"
+    language: ""
+    stars: 0
+    fork: true
+  - name: awesome-ai-security
+    url: https://github.com/matiaszabal/awesome-ai-security
+    description: "A collection of awesome resources related AI security"
+    language: ""
+    stars: 0
+    fork: true
+  - name: AI-for-Good-Specialization
+    url: https://github.com/matiaszabal/AI-for-Good-Specialization
+    description: "Learn AI's role in addressing complex challenges. Build skills combining human and machine intelligence for positive real-world impact using AI"
+    language: ""
+    stars: 1
+    fork: true
+  - name: interpretability-starter
+    url: https://github.com/matiaszabal/interpretability-starter
+    description: "🧠 Starter templates for doing interpretability research"
+    language: ""
+    stars: 0
+    fork: true
+  - name: toy-models-of-superposition
+    url: https://github.com/matiaszabal/toy-models-of-superposition
+    description: "Notebooks accompanying Anthropic's \"Toy Models of Superposition\" paper"
+    language: ""
+    stars: 1
+    fork: true
+  - name: Machine-Learning
+    url: https://github.com/matiaszabal/Machine-Learning
+    description: "Repositorio de generalidades y fundamentos de Machine Learning"
+    language: ""
+    stars: 0
+    fork: true
+  - name: fiatdex-gateway
+    url: https://github.com/matiaszabal/fiatdex-gateway
+    description: "A simple web interface to interact with the FiatDex protocol"
+    language: ""
+    stars: 0
+    fork: true
+  - name: machinemusic_grupoLiaa_UBA
+    url: https://github.com/matiaszabal/machinemusic_grupoLiaa_UBA
+    description: "http://computacional.org/"
+    language: ""
+    stars: 1
+    fork: true

@@ -59,5 +59,6 @@ token (cada 60 días) y detalles: `.linkedin/README.md`.
 - Si un post contiene `{{` o `{%` (código, plantillas), envolver ese fragmento en `{% raw %}...{% endraw %}`.
 - Posts con `tags:` y `description:` en el front matter: la portada y el blog los muestran.
 - Vista previa local: `docker compose up` y abrir http://localhost:8080
+- La página de repos sale de `_data/repos.yml`: regenerarla con `python3 bin/update_repos.py` (usa `gh`; incluye todos los repos públicos).
 - No agregar plugins ni dependencias sin consultarlo: el sitio debe seguir simple.
 - Commits con el mail noreply de GitHub (ya configurado en este repo), nunca un mail laboral.

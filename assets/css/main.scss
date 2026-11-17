@@ -11,9 +11,9 @@
    Make sure `_sass/_variables.scss` declares `$max-content-width: 72rem !default;` */
 @use "variables" with (
   $max-content-width: {{ site.max_width | default:  "930px" }},
-  // Acento grafito: oscuro en modo claro, claro en modo oscuro
-  $purple-color: #3d4349,
-  $cyan-color: #aab2ba
+  // Acento índigo (paleta de sdaza.com): intenso en modo claro, suave en modo oscuro
+  $purple-color: #6366f1,
+  $cyan-color: #818cf8
 );
 
 /* Your project partials — convert these files to `@use "variables";`
@@ -41,4 +41,273 @@
 article img {
   max-width: 100%;
   height: auto;
+}
+
+/* -------------------------------------------------------------------------
+   Paleta y tipografía tomadas de sdaza.com
+   ------------------------------------------------------------------------- */
+:root {
+  --global-bg-color: #fafafa;
+  --global-card-bg-color: #ffffff;
+  --global-code-bg-color: #f6f8fa;
+  --global-text-color: #1a1a2e;
+  --global-text-color-light: #6b7280;
+  --global-theme-color: #6366f1;
+  --global-hover-color: #4f46e5;
+  --global-divider-color: #e5e7eb;
+  --global-footer-bg-color: #fafafa;
+  --global-footer-text-color: #6b7280;
+  --global-footer-link-color: #1a1a2e;
+  --global-distill-app-color: #6b7280;
+}
+
+html[data-theme="dark"] {
+  --global-bg-color: #18181b;
+  --global-card-bg-color: #1e1e22;
+  --global-code-bg-color: #1e1e2e;
+  --global-text-color: #e4e4e7;
+  --global-text-color-light: #a1a1aa;
+  --global-theme-color: #818cf8;
+  --global-hover-color: #a5b4fc;
+  --global-divider-color: #2e2e33;
+  --global-footer-bg-color: #18181b;
+  --global-footer-text-color: #a1a1aa;
+  --global-footer-link-color: #e4e4e7;
+  --global-distill-app-color: #a1a1aa;
+}
+
+$sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Roboto, Helvetica, Arial, sans-serif;
+$mono: "JetBrains Mono", "Fira Code", "Consolas", monospace;
+
+body {
+  font-family: $sans;
+  line-height: 1.7;
+  background-color: var(--global-bg-color);
+  color: var(--global-text-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+pre, code, kbd, samp {
+  font-family: $mono;
+}
+
+pre {
+  border-radius: 8px;
+  border: 1px solid var(--global-divider-color);
+}
+
+code {
+  font-size: 0.84em;
+}
+
+/* Citas con borde de acento */
+blockquote {
+  background: var(--global-bg-color);
+  border-left: 3px solid var(--global-theme-color);
+  color: var(--global-text-color-light);
+}
+
+/* Títulos de sección pequeños y en mayúsculas (CV, docencia) */
+.courses h2.year,
+.cv h2,
+.cv .cv-section-title {
+  color: var(--global-text-color-light);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 0;
+}
+
+.repo-section-title {
+  color: var(--global-text-color-light);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin: 2rem 0 0.75rem;
+  border: 0;
+}
+
+/* Tarjetas de repositorios */
+.repo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.repo-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem 1.1rem;
+  background: var(--global-card-bg-color);
+  border: 1px solid var(--global-divider-color);
+  border-radius: 8px;
+  text-decoration: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  &:hover {
+    border-color: var(--global-theme-color);
+    box-shadow: 0 2px 10px rgba(99, 102, 241, 0.12);
+    text-decoration: none;
+  }
+
+  .repo-card-name {
+    display: flex;
+    align-items: baseline;
+    gap: 0.45rem;
+    color: var(--global-theme-color);
+    font-size: 0.95rem;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+  }
+
+  .repo-card-desc {
+    color: var(--global-text-color-light);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    flex-grow: 1;
+  }
+
+  .repo-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--global-text-color-light);
+    font-family: $mono;
+    font-size: 0.75rem;
+  }
+}
+
+/* Listado del blog: miniatura grande a la izquierda (como fanpu.io) */
+.post-list li .post-row {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 1.5rem;
+  align-items: start;
+
+  .post-row-thumb img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* CV propio, con columna de años (como sdaza.com) */
+.cv-page {
+  .cv-downloads {
+    margin: 0 0 1.75rem;
+  }
+
+  .cv-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.4rem 1rem;
+    color: var(--global-theme-color);
+    border: 1px solid var(--global-theme-color);
+    border-radius: 6px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: var(--global-theme-color);
+      color: var(--global-bg-color);
+      text-decoration: none;
+    }
+  }
+
+  .cv-section {
+    margin-bottom: 2rem;
+  }
+
+  .cv-section-title {
+    color: var(--global-text-color-light);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin: 0 0 0.5rem;
+    padding: 0;
+    border: 0;
+  }
+
+  .cv-summary {
+    font-size: 0.95rem;
+    line-height: 1.7;
+  }
+
+  .cv-entry {
+    display: flex;
+    gap: 1.25rem;
+    padding: 0.85rem 0;
+    border-bottom: 1px solid var(--global-divider-color);
+  }
+
+  .cv-entry-year {
+    flex-shrink: 0;
+    min-width: 110px;
+    color: var(--global-theme-color);
+    font-size: 0.78rem;
+    font-weight: 600;
+  }
+
+  .cv-entry-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  .cv-entry-institution {
+    color: var(--global-theme-color);
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .cv-entry-desc {
+    color: var(--global-text-color-light);
+    font-size: 0.83rem;
+    line-height: 1.6;
+    margin-top: 0.25rem;
+  }
+
+  .cv-skill {
+    display: flex;
+    gap: 1.25rem;
+    padding: 0.5rem 0;
+  }
+
+  .cv-skill-label {
+    flex-shrink: 0;
+    min-width: 170px;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .cv-skill-tags {
+    color: var(--global-text-color-light);
+    font-size: 0.83rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 640px) {
+    .cv-entry,
+    .cv-skill {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+  }
 }

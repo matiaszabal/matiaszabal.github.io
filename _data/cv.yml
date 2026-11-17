@@ -1,189 +1,106 @@
 cv:
-  name: Albert Einstein
-  label: Scientist
-  email: einstein@example.com
-  location: Princeton, NJ
+  name: Matías Zabaljáuregui
+  label: Coordinador Académico (UTDT) · Profesor de posgrado (UNLP)
+  email: ""
+  location: ""
   image: ""
-  summary: A German-born theoretical physicist, widely ranked among the greatest and most influential scientists of all time
+  summary: >-
+    Magíster en Cómputo de Altas Prestaciones y doctorando en Ciencias de la Computación (UNLP).
+    Más de 15 años entre sistemas de alto rendimiento (kernel de Linux, virtualización, redes de alta velocidad)
+    y arquitectura de seguridad para IA. Enseño arquitectura de agentes y seguridad de agentes de IA a nivel de posgrado.
+    Mi investigación aplica teoría de juegos a la veracidad y la alineación en el consenso distribuido de modelos de lenguaje.
 
   social_networks:
-    - network: X
-      username: AlbertEinstein
     - network: GitHub
-      username: example
+      username: matiaszabal
     - network: LinkedIn
-      username: example
-
-  address:
-    street: 2712 Broadway St
-    city: San Francisco
-    region: California
-    postalCode: CA 94115
-    countryCode: US
+      username: zabaljauregui
 
   sections:
     Education:
-      - institution: University of Zurich
-        location: Zurich, Switzerland
-        url: https://www.uzh.ch/
-        area: Physics
-        studyType: PhD
-        start_date: 1900
-        end_date: 1905
-        score: ""
-        courses: "Theory of Relativity"
+      - institution: Universidad Nacional de La Plata
+        location: La Plata, Argentina
+        area: Ciencias de la Computación
+        studyType: Doctorado (tesis en curso)
+        start_date: 2012
+        end_date: present
         highlights:
-          - Description 1.
-          - Description 2.
+          - "Tesis: marcos de teoría de juegos para la veracidad y la alineación en el consenso distribuido de LLM."
 
-      - institution: Eidgenössische Technische Hochschule
-        location: Zurich, Switzerland
-        area: Physics
-        studyType: Federal teaching diploma
-        start_date: 1896
-        end_date: 1900
+      - institution: Universidad Nacional de La Plata
+        location: La Plata, Argentina
+        area: Cómputo de Altas Prestaciones
+        studyType: Magíster
+        start_date: 2009
+        end_date: 2012
         highlights:
-          - Description 1.
-          - Description 2.
+          - "Tesis «A kernel designed for virtualization», calificada con 10, liberada bajo GPL. Beca de iniciación a la investigación."
+
+      - institution: Universidad Nacional de La Plata
+        location: La Plata, Argentina
+        area: Ciencias de la Computación
+        studyType: Grado
+        start_date: 2002
+        end_date: 2007
+        highlights:
+          - "Tesis «Performance and scalability of the Linux kernel on high-speed networks», calificada con 10 y usada como material de un curso de posgrado."
+
+      - institution: MIT Professional Education
+        area: Data Science
+        studyType: Posgrado
+        start_date: 2016
+        end_date: 2018
 
     Experience:
-      - company: Institute for Advanced Study, Princeton University
-        position: Professor of Theoretical Physics
-        location: Princeton University, NJ
-        start_date: 1933
-        end_date: 1955
-        summary: Teaching at Palmer Physical Laboratory (now 302 Frist Campus Center). While not a professor at Princeton, I associated with the physics professors and continued to give lectures on campus.
-        highlights:
-          - Relativity
-          - Description 2.
+      - company: Universidad Torcuato Di Tella
+        position: Coordinador Académico, Arquitectura de Agentes IA
+        location: Buenos Aires, Argentina
+        start_date: 2026
+        end_date: present
 
-      - company: California Institute of Technology
-        position: Visiting Professor
-        location: Pasadena, California, US
-        start_date: 1933
-        end_date: 1933
-        highlights:
-          - Description 1.
-          - Description 2.
+      - company: Universidad Nacional de La Plata
+        position: Profesor de posgrado, Seguridad en Agentes de IA
+        location: La Plata, Argentina
+        start_date: 2026
+        end_date: present
 
-      - company: Kaiser Wilhelm Institute for Physics
-        position: Director
-        location: Berlin, Germany
-        start_date: 1917
-        end_date: 1933
+      - company: Universidad de Buenos Aires
+        position: Investigador en seguridad de IA
+        location: Buenos Aires, Argentina
+        start_date: 2024-08
+        end_date: 2026-04
+        summary: Investigación aplicada en robustez adversaria y evaluación de LLM.
 
-      - company: Karl-Ferdinand University
-        position: Professor of Theoretical Physics
-        location: Prague, Czechoslovakia
-        start_date: 1911
-        end_date: 1917
+      - company: Global Council for Responsible AI
+        position: Embajador global de IA Responsable
+        start_date: 2025
+        end_date: present
 
-      - company: University of Zurich
-        position: Associate Professor of Theoretical Physics
-        location: Zurich, Switzerland
-        start_date: 1909
-        end_date: 1911
-
-    Volunteer:
-      - company: People's Climate March
-        position: Lead Organizer
-        location: Zurich, Switzerland
-        start_date: 2014-04-01
-        end_date: 2015-07-01
-        summary: Lead organizer for the New York City branch of the People's Climate March, the largest climate march in history.
-        highlights:
-          - "Awarded 'Climate Hero' award by Greenpeace for my efforts organizing the march."
-          - "Men of the year 2014 by Time magazine"
-
-    Awards:
-      - title: Nobel Prize in Physics
-        authors:
-          - "Royal Swedish Academy of Sciences"
-        date: 1921-11-01
-        awarder: Royal Swedish Academy of Sciences
-        url: https://www.nobelprize.org/prizes/physics/1921/einstein/biographical/
-        summary: The Nobel Prizes are five separate prizes that, according to Alfred Nobel's will of 1895, are awarded to 'those who, during the preceding year, have conferred the greatest benefit to humankind.'
-
-      - title: Max Planck Medal
-        authors:
-          - "German Physical Society"
-        date: 2029
-        awarder: German Physical Society
-        summary: Awarded for outstanding scientific achievement
+      - company: Universidad Torcuato Di Tella
+        position: Docente, Maestría en Management + Analytics
+        location: Buenos Aires, Argentina
+        start_date: 2018
+        end_date: 2021
 
     Publications:
-      - title: Zur Elektrodynamik bewegter Körper
+      - title: "RLMS-Shield: The Abstention Frontier and Peer-Prediction Auditing for Automated LLM Red-Teaming"
         authors:
-          - Albert Einstein
-        publisher: Annalen der Physik
-        releaseDate: 1905-06-30
-        url: https://en.wikisource.org/wiki/Translation:On_the_Electrodynamics_of_Moving_Bodies
-        summary: It concerned an interpretation of the Michelson–Morley experiment and the properties of light and time. Special relativity incorporates the principle that the speed of light is the same for all inertial observers regardless of the state of motion of the source.
-
-      - title: Über einen die Erzeugung und Verwandlung des Lichtes betreffenden heuristischen Gesichtspunkt
-        authors:
-          - Albert Einstein
-        publisher: Annalen der Physik
-        releaseDate: 1905-03-18
-        url: https://de.wikisource.org/wiki/Über_einen_die_Erzeugung_und_Verwandlung_des_Lichtes_betreffenden_heuristischen_Gesichtspunkt
-        summary: In the second paper, he applied the quantum theory to light to explain the photoelectric effect. In particular, he used the idea of light quanta (photons) to explain experimental results, but stressed the importance of the experimental results. The importance of his work on the photoelectric effect earned him the Nobel Prize in Physics in 1921.
-
-      - title: Die Grundlage der allgemeinen Relativitätstheorie
-        authors:
-          - Albert Einstein
-        publisher: Annalen der Physik
-        releaseDate: 1916-03-20
-        url: https://de.wikisource.org/wiki/Die_Grundlage_der_allgemeinen_Relativitätstheorie
-        summary: The publication of the theory of general relativity made him internationally famous. He was professor of physics at the universities of Zurich (1909–1911) and Prague (1911–1912), before he returned to ETH Zurich (1912–1914).
+          - Zabaljáuregui, Matías
+          - otros
+        publisher: International Conference on Trust, Privacy and Security in Intelligent Systems and Applications (TPS), Application Track
+        releaseDate: 2026
+        summary: Aceptado para presentación y publicación.
 
     Skills:
-      - name: Physics
-        level: Master
-        icon: fa-solid fa-hashtag
-        keywords: "Quantum Mechanics, Quantum Computing, Quantum Information, Quantum Cryptography, Quantum Communication, Quantum Teleportation"
-
-    Languages:
-      - name: German
-        summary: "Native speaker"
-
-      - name: English
-        summary: "Fluent"
-
-    Interests:
-      - name: Physics
-        icon: fa-solid fa-tag
-        keywords: "Quantum Mechanics, Quantum Computing, Quantum Information, Quantum Cryptography, Quantum Communication, Quantum Teleportation"
-
-    Certificates:
-      - name: Machine Learning
-        date: 2018-01-01
-        issuer: Stanford University
-        icon: fa-solid fa-location-dot
-
-      - name: Quantum Computing
-        date: 2018-01-01
-        issuer: Stanford University
-        icon: fa-solid fa-tag
-
-      - name: Quantum Information
-        date: 2018-01-01
-        issuer: Stanford University
-        icon: fa-solid fa-envelope
-
-    Projects:
-      - name: Quantum Computing
-        summary: Quantum computing is the use of quantum-mechanical phenomena such as superposition and entanglement to perform computation. Computers that perform quantum computations are known as quantum computers.
-        highlights:
-          - Quantum Teleportation
-          - Quantum Cryptography
-        start_date: 2018-01-01
-        end_date: 2018-01-01
-
-    References:
-      - name: Professor John Doe
-        icon: fa-solid fa-laptop
-        reference: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit.
-
-      - name: Professor Jane Smith
-        icon: fa-solid fa-thumbtack
-        reference: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam condimentum, diam quis convallis euismod, arcu mi ullamcorper lorem, a vestibulum nunc magna at sem. Sed in risus ac felis varius blandit.
+      - name: Agentes de IA
+        icon: fa-solid fa-robot
+        keywords: "Google Agent Development Kit (ADK), orquestación multiagente, patrones ReAct, planner-executor y reflection, evaluación de agentes, Model Context Protocol (MCP)"
+      - name: Seguridad y gobernanza
+        icon: fa-solid fa-shield-halved
+        keywords: "Defensa contra prompt injection y jailbreak, guardrails, redacción de PII y DLP, RBAC, OAuth, trazas de auditoría, EU AI Act, NIST AI RMF, ISO 42001"
+      - name: Plataforma de IA
+        icon: fa-solid fa-layer-group
+        keywords: "Gateways de LLM, ruteo multiproveedor con fallback, observabilidad (Langfuse), atribución de costos, cuotas y presupuestos"
+      - name: Lenguajes e infraestructura
+        icon: fa-solid fa-terminal
+        keywords: "Python, C, Bash, SQL, Docker, Kubernetes, CI/CD, infraestructura como código, HPC, virtualización, kernel de Linux"
